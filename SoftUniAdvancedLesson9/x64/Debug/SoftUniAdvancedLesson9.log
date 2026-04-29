@@ -1,0 +1,5 @@
+﻿  SoftUniAdvancedLesson9.cpp
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson9\SoftUniAdvancedLesson9.cpp(64,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  SoftUniAdvancedLesson9.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniAdvancedLesson9.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

@@ -1,0 +1,5 @@
+﻿  SoftUniLesson10.cpp
+D:\Programming\C++\SoftUni\SoftUniLesson10\SoftUniLesson10.cpp(100,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  SoftUniLesson10.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniLesson10.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

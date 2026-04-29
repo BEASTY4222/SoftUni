@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Programming\\C\u002B\u002B\\SoftUni\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A7788FD8-9541-40B8-AE2A-2299F3A5AA22}|hackerRank\\hackerRank.vcxproj|D:\\Programming\\C\u002B\u002B\\SoftUni\\hackerRank\\hackerRank.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A7788FD8-9541-40B8-AE2A-2299F3A5AA22}|hackerRank\\hackerRank.vcxproj|solutionrelative:hackerRank\\hackerRank.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 124,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "hackerRank.cpp",
+              "DocumentMoniker": "D:\\Programming\\C\u002B\u002B\\SoftUni\\hackerRank\\hackerRank.cpp",
+              "RelativeDocumentMoniker": "hackerRank\\hackerRank.cpp",
+              "ToolTip": "D:\\Programming\\C\u002B\u002B\\SoftUni\\hackerRank\\hackerRank.cpp",
+              "RelativeToolTip": "hackerRank\\hackerRank.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-24T20:12:59.257Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

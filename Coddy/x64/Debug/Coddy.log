@@ -1,0 +1,8 @@
+﻿  Coddy.cpp
+D:\Programming\C++\SoftUni\Coddy\Coddy.cpp(479,13): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\Coddy\Coddy.cpp(540,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\Coddy\Coddy.cpp(622,19): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\Coddy\Coddy.cpp(633,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Coddy.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\Coddy.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

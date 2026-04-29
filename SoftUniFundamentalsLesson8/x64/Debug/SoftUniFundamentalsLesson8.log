@@ -1,0 +1,7 @@
+﻿  SoftUniFundamentalsLesson8.cpp
+D:\Programming\C++\SoftUni\SoftUniFundamentalsLesson8\SoftUniFundamentalsLesson8.cpp(83,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniFundamentalsLesson8\SoftUniFundamentalsLesson8.cpp(87,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniFundamentalsLesson8\SoftUniFundamentalsLesson8.cpp(162,7): warning C4804: '>': unsafe use of type 'bool' in operation
+  SoftUniFundamentalsLesson8.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniFundamentalsLesson8.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

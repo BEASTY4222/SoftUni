@@ -1,0 +1,5 @@
+﻿  SoftUniExam.cpp
+D:\Programming\C++\SoftUni\SoftUniExam\SoftUniExam.cpp(157,25): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  SoftUniExam.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniExam.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

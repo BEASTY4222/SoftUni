@@ -1,0 +1,5 @@
+﻿D:\C# projects\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (SoftUni.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  SoftUniTask1.cpp
+  SoftUni.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniLesson1.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

@@ -1,0 +1,7 @@
+﻿  SoftUniLesson6.cpp
+D:\Programming\C++\SoftUni\SoftUniLesson6\SoftUniLesson6.cpp(103,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniLesson6\SoftUniLesson6.cpp(113,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniLesson6\SoftUniLesson6.cpp(123,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  SoftUniLesson6.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniLesson6.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

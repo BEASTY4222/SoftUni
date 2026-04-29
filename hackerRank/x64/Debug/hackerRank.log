@@ -1,0 +1,6 @@
+﻿  hackerRank.cpp
+D:\Programming\C++\SoftUni\hackerRank\hackerRank.cpp(21,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\hackerRank\hackerRank.cpp(54,29): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+  hackerRank.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\hackerRank.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

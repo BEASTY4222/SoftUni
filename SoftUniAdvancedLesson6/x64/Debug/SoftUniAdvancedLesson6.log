@@ -1,0 +1,13 @@
+﻿  SoftUniAdvancedLesson6.cpp
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(108,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(108,21): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(197,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(217,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(218,37): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(221,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(246,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(257,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C++\SoftUni\SoftUniAdvancedLesson6\SoftUniAdvancedLesson6.cpp(258,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  SoftUniAdvancedLesson6.vcxproj -> D:\Programming\C++\SoftUni\x64\Debug\SoftUniAdvancedLesson6.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

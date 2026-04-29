@@ -1,0 +1,63 @@
+#include <iostream>
+#include <iomanip> 
+#include <sstream>
+#include <deque>
+using namespace std;
+
+string toHex(const int &n) {
+	stringstream ss;
+	ss << hex << uppercase << static_cast<long long>(n);
+	return ss.str();
+}
+string secondNumber(const double &n) {
+	deque<string> result;
+
+	if (n > 0) { result.push_front("+"); }
+
+	stringstream secondPart;;
+	secondPart << setprecision(2) << fixed << n;
+
+	result.push_back(secondPart.str());//the decimal part and the possitve sign or negative sign
+	int numberOfDigits = secondPart.str().length() + 1;//we account for the possitve or negative sign
+
+	string padding;
+	while (numberOfDigits < 15) {
+		padding.append("_"); //adding the padding
+
+		numberOfDigits++;
+	}
+	result.push_front(padding);
+
+	string finalResult;
+	for (int i = 0; i < result.size();i++) {
+		finalResult += result[i];
+	}
+
+	return finalResult;
+}
+string scientificNumber(const double &n) {
+	stringstream ss;
+	ss << scientific << setprecision(9) << uppercase << n;
+	return ss.str();
+}
+
+int main() {
+	int T; cin >> T;
+	cout << setiosflags(ios::uppercase);
+	cout << setw(0xf) << internal;
+	while (T--) {
+		double A; cin >> A;
+		double B; cin >> B;
+		double C; cin >> C;
+
+		 Enter your code here 
+string hexA = "0x" + toHex(A);
+string secondB = secondNumber(B);
+string scientificC = scientificNumber(C);
+
+cout << hexA << endl;
+cout << secondB << endl;
+cout << scientificC << endl;
+	}
+	return 0;
+}
