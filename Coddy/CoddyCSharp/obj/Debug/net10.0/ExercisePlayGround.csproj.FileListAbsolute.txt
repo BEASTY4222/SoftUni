@@ -1,0 +1,15 @@
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/bin/Debug/net10.0/ExercisePlayGround
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/bin/Debug/net10.0/ExercisePlayGround.deps.json
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/bin/Debug/net10.0/ExercisePlayGround.runtimeconfig.json
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/bin/Debug/net10.0/ExercisePlayGround.dll
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/bin/Debug/net10.0/ExercisePlayGround.pdb
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.GeneratedMSBuildEditorConfig.editorconfig
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.AssemblyInfoInputs.cache
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.AssemblyInfo.cs
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.csproj.CoreCompileInputs.cache
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.sourcelink.json
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.dll
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/refint/ExercisePlayGround.dll
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.pdb
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ExercisePlayGround.genruntimeconfig.cache
+/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/Coddy/CoddyCSharp/obj/Debug/net10.0/ref/ExercisePlayGround.dll
