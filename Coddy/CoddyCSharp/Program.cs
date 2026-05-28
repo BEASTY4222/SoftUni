@@ -204,8 +204,58 @@ class Program {
 
         return result;
     }
+    private static void CheckMovieRestriction(int age, bool withParent, string movieRating)
+    {
+        switch (movieRating)
+        {
+            case "G":
+                Console.WriteLine("Allowed");
+                break;
+
+            case "PG":
+                if (age >= 8 || withParent)
+                {
+                    Console.WriteLine("Allowed");
+                }
+                else
+                {
+                    Console.WriteLine("Not Allowed");
+                }
+                break;
+
+            case "PG-13":
+                if (age >= 13 || (withParent && age >= 10))
+                {
+                    Console.WriteLine("Allowed");
+                }
+                else
+                {
+                    Console.WriteLine("Not Allowed");
+                }
+                break;
+
+            case "R":
+                if (age >= 17 || (withParent && age >= 15))
+                {
+                    Console.WriteLine("Allowed");
+                }
+                else
+                {
+                    Console.WriteLine("Not Allowed");
+                }
+                break;
+
+            default:
+                Console.WriteLine("Invalid rating");
+                break;
+        }
+    }
+
 
     public static void Main(String[] args) {
-        Console.WriteLine(evaluateApplication(22,72,false));
+        int age = int.Parse(Console.ReadLine());
+        bool withParent = bool.Parse(Console.ReadLine());
+        string movieRating = Console.ReadLine();
+        CheckMovieRestriction(age, withParent, movieRating);    
     }
 }
