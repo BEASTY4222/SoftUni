@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Write-your-first-C#-code", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "FreeCodeCamp\MicrosoftC#Path\Write-your-first-C#-code\ConsoleApp1\ConsoleApp1.csproj", "{7852B0DD-9B70-47E8-B44C-47C745B688B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExercisePlayGround", "Coddy\CoddyCSharp\ExercisePlayGround\ExercisePlayGround.csproj", "{3E6BA4C1-D1FF-4A60-96FF-801B940034F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExercisePlayGround", "Coddy\CoddyCSharp\ExercisePlayGround.csproj", "{3E6BA4C1-D1FF-4A60-96FF-801B940034F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
