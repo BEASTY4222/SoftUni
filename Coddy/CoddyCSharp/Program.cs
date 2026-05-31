@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Buffers;
 using System.Globalization;
+using System.Linq.Expressions;
+
 
 class Program
 {
@@ -458,12 +461,347 @@ class Program
         return result;
     }
 
+    private static int optimizedSum(int[] numbers)
+    {
+        int sum = 0, length = numbers.Length;
+        for(int i = 0;i < length;i++) sum += numbers[i];
+        return sum;
+    }
+
+    private static int countElements(string[][] nestedArray)
+    {
+        // Write your code here
+        int count = 0, length = nestedArray.Length;
+        for(int  i = 0;i < length;i++) 
+            for(int j = 0;j < nestedArray[i].Length;j++)
+                count++;
+        return count;
+    }
+
+    private static int BinarySearch(int[] numbers, int target)
+    {
+        // Write your code here
+        Array.Sort(numbers);
+
+        int leftSide = 0, rightSide = numbers.Length-1, middle = leftSide + (rightSide - leftSide) / 2;
+        while(leftSide <= rightSide)
+        {
+            middle = leftSide + (rightSide - leftSide) / 2;
+            if(numbers[middle] == target) return middle;
+            else if(numbers[middle] < target) leftSide = middle + 1;
+            else if(numbers[middle] > target) rightSide = middle - 1;
+        }
+        return -1;
+    }
+
+    public static int findWithDifferentLoops(int[] numbers, int target)
+    {
+        // Write your code here
+        int index = -1;
+        for(int i = 0; i < numbers.Length;i++) if(numbers[i] == target) index = i;
+        return index;
+    }
+
+    private static int[] findElementOccurrences(int[] numbers, int target)
+    {
+        // Write your code here
+        int occurrences = 0;
+        for(int i = 0; i < numbers.Length;i++) if(numbers[i] == target) occurrences++;
+
+        int[] result = new int[4];
+        for(int  i = 0;i < 4;i++) result[i] = occurrences;
+
+        return result;
+    }
+
+    public static int refactorArrayFilter(int[] numbers)
+    {
+        // Write your code here
+        int count = 0;
+        foreach(int number in numbers) if(number % 3 == 0) count++;
+        return count;
+    }
+
+    public static int optimizeSearchAlgorithm(int[][] data, int target)
+    {
+        // Write your solution here
+        int occurrences = 0, lenght = data.Length;
+        for(int i = 0;i < lenght;i++)
+            for(int j = 0;j < data[i].Length;j++)
+                if(data[i][j] == target) occurrences++;
+        return occurrences;
+    }
+
+    private static string ProcessPayment(decimal paymentAmount, decimal accountBalance, bool isAccountLocked)
+    {
+        // Write your code here
+        string result = "Payment processed successfully";
+        if(paymentAmount <= 0) result = "Error: Payment amount must be positive";
+        else if(accountBalance < paymentAmount) result = "Error: Insufficient funds";
+        else if(isAccountLocked) result = "Error: Account is locked";
+
+        return result;
+    }
+
+    private static int DivideNumbers(int numerator, int denominator)
+    {
+        // Write your code here
+        if(denominator == 0)
+        {
+            Console.WriteLine("Cannot divide by zero");
+            return 0;    
+        }
+        return numerator / denominator;
+    }
+
+    private static bool validateRegistration(string username, string password, int age)
+    {
+        // Write your code here using guard clauses
+        if (String.IsNullOrEmpty(username))
+        {
+            Console.WriteLine("Username cannot be empty");
+            return false;
+        }
+
+        if(String.IsNullOrEmpty(password) || password.Length < 8)
+        {
+            Console.WriteLine("Password must be at least 8 characters");
+            return false;
+        }
+
+        if (age < 18)
+        {
+            Console.WriteLine("User must be at least 18 years old");
+            return  false;
+        }
+
+        Console.WriteLine("Registration successful");
+        return true;
+    }
+
+    private static void ProcessCommands(string command)
+    {
+        // Write your code here
+        switch (command)
+        {
+            case "start": Console.WriteLine("Starting process"); goto end;
+            case "stop": Console.WriteLine("Stopping process"); goto end;
+            case "pause": Console.WriteLine("Pausing process"); goto end;
+            default: Console.WriteLine("Unknown command"); goto end;
+        }
+
+        end:
+        Console.WriteLine("Command processed");
+    }
+
+    private static int ProcessNumbers(int[] numbers)
+    {
+        // Write your code here
+        int lenght = numbers.Length, sum = 0;
+        for (int i = 0; i < lenght;i++)
+        {
+            if(numbers[i] <= 0) continue;
+            if(numbers[i] > 100) break;
+            Console.WriteLine(numbers[i]);
+            sum += numbers[i];
+        }
+        return sum;
+    }
+
+    public static int filterAndSum(int[] numbers, int threshold)
+    {
+        // Write your code here
+        int count = 0;
+        foreach(int number in numbers)
+        {
+            if(number < 0 || number > threshold) continue;
+            if(number == threshold) break;
+
+            Console.WriteLine(number);
+            count++;
+        }
+        return count;
+    }
+
+    public static int DivideNumbersEx(int numerator, int denominator) {
+        // Write your code here
+        try
+        {
+            return numerator / denominator;
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Cannot divide by zero!");
+            return 0;
+        }
+    }
+
+    private static int safeParseInt(string str, int defaultValue) {
+        // Write your code here
+        try
+        {
+            return int.Parse(str);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid number format!");
+            return defaultValue;
+        }
+        catch(OverflowException)
+        {
+            Console.WriteLine("Number out of range!");
+            return defaultValue;
+        }
+        
+    }
+
+    public static int ProcessArray(int[] array, int index)
+    {
+        // Write your code here
+        try
+        {
+            return array[index];
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return -1;
+        }
+    }
+
+    public static int DivideNumbersExEx(string numeratorStr, string denominatorStr)
+    {
+        // Write your code here
+        try
+        {
+            return int.Parse(numeratorStr) / int.Parse(denominatorStr);
+
+        }catch(FormatException)
+        {
+            Console.WriteLine("Invalid format");
+            return 0;
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Cannot divide by zero");
+            return 0;
+        }
+    }
+
+    private static int processArrayElement(string[] array, int index)
+    {
+        // Write your code here
+        try
+        {
+            return 100 / int.Parse(array[index]);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Console.WriteLine("Array index out of bounds");
+            return -1;
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Cannot parse to number");
+            return -1;
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Cannot divide by zero");
+            return -1;
+        }
+        catch 
+        {
+            Console.WriteLine("Unknown error occurred");
+            return -1;
+        }
+    }
+
+    public static void ReadFile(string filename)
+    {
+        // Write your code here
+        StreamReader reader = new StreamReader(filename);
+        string content = reader.ReadToEnd();
+        Console.WriteLine(content);
+
+        reader.Close();
+    }
+
+    public static void ProcessData(string filename)
+    {
+        // Write your code here
+        StreamReader reader;
+        try
+        {
+            reader = new StreamReader(filename);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine($"ERROR: File not found: {filename}");
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine($"ERROR: Could not read the file: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("File operation completed.");
+        }
+    }
+
+    private static void processTransaction(string transactionId)
+    {
+        // Write your code here
+        Console.WriteLine("Opening connection");
+        try
+        {
+            if(transactionId == "invalid") throw new ArgumentException("Invalid transaction ID");
+            if(transactionId == "error") throw new Exception("Processing error");
+            Console.WriteLine($"Processing transaction: {transactionId}");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"ERROR: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"ERROR: {ex.Message}");
+        }finally {Console.WriteLine("Connection closed");}
+    }
+
+    public static int processFile(string filename)
+    {
+        // Write your code here
+        try
+        {
+            int count = 0;
+            StreamReader reader = new StreamReader(filename);
+            while(reader.ReadLine() != null) {reader.ReadLine(); count++;}
+            return count;
+        }catch(FileNotFoundException) {return -1;}
+    }
+
+    class InvalidTemperatureException : Exception
+    {
+        public InvalidTemperatureException() : base("emperature is not valid.")
+        {
+            
+        }
+        public InvalidTemperatureException(string message) : base(message)
+        {
+            
+        } 
+    }
+
+    private static bool checkTemperature(int celsius)
+    {
+        // Write your code here
+        if(-273 > celsius) throw new InvalidTemperatureException("Temperature below absolute zero!");
+
+        return true;
+    }
+
     public static void Main(String[] args)
     {
-        string weather = Console.ReadLine();
-        string preferredLocation = Console.ReadLine();
-        
-        GetSportRecommendation(weather, preferredLocation);
-        
+        Console.WriteLine(ProcessNumbers([10,20,-5,0,3,-2,95,101,75]));
     }
 }
