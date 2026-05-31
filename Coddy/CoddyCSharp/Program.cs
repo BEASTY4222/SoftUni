@@ -458,12 +458,90 @@ class Program
         return result;
     }
 
+    private static int optimizedSum(int[] numbers)
+    {
+        int sum = 0, length = numbers.Length;
+        for(int i = 0;i < length;i++) sum += numbers[i];
+        return sum;
+    }
+
+    private static int countElements(string[][] nestedArray)
+    {
+        // Write your code here
+        int count = 0, length = nestedArray.Length;
+        for(int  i = 0;i < length;i++) 
+            for(int j = 0;j < nestedArray[i].Length;j++)
+                count++;
+        return count;
+    }
+
+    private static int BinarySearch(int[] numbers, int target)
+    {
+        // Write your code here
+        Array.Sort(numbers);
+
+        int leftSide = 0, rightSide = numbers.Length-1, middle = leftSide + (rightSide - leftSide) / 2;
+        while(leftSide <= rightSide)
+        {
+            middle = leftSide + (rightSide - leftSide) / 2;
+            if(numbers[middle] == target) return middle;
+            else if(numbers[middle] < target) leftSide = middle + 1;
+            else if(numbers[middle] > target) rightSide = middle - 1;
+        }
+        return -1;
+    }
+
+    public static int findWithDifferentLoops(int[] numbers, int target)
+    {
+        // Write your code here
+        int index = -1;
+        for(int i = 0; i < numbers.Length;i++) if(numbers[i] == target) index = i;
+        return index;
+    }
+
+    private static int[] findElementOccurrences(int[] numbers, int target)
+    {
+        // Write your code here
+        int occurrences = 0;
+        for(int i = 0; i < numbers.Length;i++) if(numbers[i] == target) occurrences++;
+
+        int[] result = new int[4];
+        for(int  i = 0;i < 4;i++) result[i] = occurrences;
+
+        return result;
+    }
+
+    public static int refactorArrayFilter(int[] numbers)
+    {
+        // Write your code here
+        int count = 0;
+        foreach(int number in numbers) if(number % 3 == 0) count++;
+        return count;
+    }
+
+    public static int optimizeSearchAlgorithm(int[][] data, int target)
+    {
+        // Write your solution here
+        int occurrences = 0, lenght = data.Length;
+        for(int i = 0;i < lenght;i++)
+            for(int j = 0;j < data[i].Length;j++)
+                if(data[i][j] == target) occurrences++;
+        return occurrences;
+    }
+
+    private static string ProcessPayment(decimal paymentAmount, decimal accountBalance, bool isAccountLocked)
+    {
+        // Write your code here
+        string result = "Payment processed successfully";
+        if(paymentAmount <= 0) result = "Error: Payment amount must be positive";
+        else if(accountBalance < paymentAmount) result = "Error: Insufficient funds";
+        else if(isAccountLocked) result = "Error: Account is locked";
+
+        return result;
+    }
+
     public static void Main(String[] args)
     {
-        string weather = Console.ReadLine();
-        string preferredLocation = Console.ReadLine();
-        
-        GetSportRecommendation(weather, preferredLocation);
-        
+        Console.WriteLine(optimizeSearchAlgorithm([[12, 14], [0, -1, 4], [27, 3, 3, 8], [5]],3));
     }
 }
