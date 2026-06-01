@@ -800,8 +800,102 @@ class Program
         return true;
     }
 
+    class InvalidUserAgeException : Exception
+    {
+        public InvalidUserAgeException() : base("Age must be between 18 and 120") { }
+
+        public InvalidUserAgeException(string message) : base(message){ }
+    }
+    
+    private static string processUserData(string filePath, int userAge)
+    {
+        // Write your code here
+        try
+        {
+            StreamReader reader = new StreamReader(filePath);
+            if(userAge < 18 || userAge > 120) throw new InvalidUserAgeException();
+            return reader.ReadToEnd();
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("User file not found");
+            return "No data";
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine($"Error reading user data: {ex.Message}");
+            return "No data";
+        }
+        catch (InvalidUserAgeException ex)
+        {
+            Console.WriteLine(ex.Message);
+            return "No data";
+        }
+    }
+
+    private static void ProcessName(string? name)
+    {
+        // Write your code here
+        Console.WriteLine(name == null ? "Name is null" : $"Name length is {name.Length}");
+    }
+    
+    private static void SafeProcessData(string? data, int maxLength)
+    {
+        // Write your code here
+        Console.WriteLine(data == null ? "Invalid data: null reference" : data.Length > maxLength ? "Data too long" : $"Processing: {data}");
+    }
+
+    public static int? ProcessNullableAge(int? age)
+    {
+        if(age.HasValue)
+        {
+            Console.WriteLine($"Age is: {age} years");
+            return age;
+        }
+        else
+        {
+            Console.WriteLine("Age not provided");
+            return 0;
+        }
+    }
+    
+    public static string ProcessUserName(string userName)
+    {
+        // Write your code here
+        if (String.IsNullOrWhiteSpace(userName))
+        {
+            if(userName == null) return "No user provided";
+
+            return "Invalid username";
+        }
+
+        return $"Welcome, {userName}!";
+    }
+    
+    public static string processPersonInfo(string name, string email, int? age)
+    {
+        // The string inputs may arrive as the literal text "null" — treat those as missing values
+        // (same as an empty string or a missing integer)
+
+        // If all inputs are missing/null, return "No information provided"
+
+        // Otherwise, build a result string with the available fields:
+        // "Name: <name>", "Email: <email>", "Age: <age>"
+        // Separate each present field with ", "
+
+        // Write your code here
+        List<string> result = new List<string>();
+        if (String.IsNullOrWhiteSpace(name) && String.IsNullOrWhiteSpace(email) && age == null)
+            return "No information provided";
+        if(name != "null" || name.Contains(" ")) { result.Add($"Name: {name}"); }
+        if (email != "null") { result.Add($"Email: {email}"); }
+        if(age.HasValue) { result.Add($"Age: {age}"); }
+        
+        return string.Join(", ", result);
+    }
+    
     public static void Main(String[] args)
     {
-        Console.WriteLine(ProcessNumbers([10,20,-5,0,3,-2,95,101,75]));
+        Console.WriteLine(processPersonInfo("Dave","null", 18));
     }
 }
