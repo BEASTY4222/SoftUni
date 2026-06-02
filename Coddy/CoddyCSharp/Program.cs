@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Buffers;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 
@@ -894,8 +895,91 @@ class Program
         return string.Join(", ", result);
     }
     
+    public static void processUserData(string? userData)
+    {
+        // Hint: the string "null" should be treated as an actual null value
+        // Write your code here
+        if (userData == null || userData == "null")
+        {
+            Console.WriteLine("Error: User data is null");
+            return;
+        }else if (userData == "")
+        {
+            Console.WriteLine("Error: User data is empty");
+            return;
+        }
+
+        Console.WriteLine($"Processing: {userData.ToUpper()}");
+    }
+    
+    public static void validateUserInput(string username, string email, int? age)
+    {
+        // Write your code here
+        if (String.IsNullOrWhiteSpace(username) || username == "null")
+        {
+            Console.WriteLine("ERROR: Invalid username");
+            return;
+        }
+        if(String.IsNullOrWhiteSpace(email) || email == "null" || !email.Contains('@'))
+        {
+            Console.WriteLine("ERROR: Invalid email format");
+            return;
+        }
+        if(age < 18 || age == null)
+        {
+            Console.WriteLine("ERROR: User must be 18 or older");
+            return;
+        }
+        
+        Console.WriteLine("User data validated successfully");
+    }
+
+    public static string SafelyProcessData(string? name, int? age)
+    {
+        if (name == null || name == "null")return "No name provided";
+        if (String.IsNullOrWhiteSpace(name)) return "Invalid name";
+        if (age == null) return $"Name: {name}, Age: Unknown";
+        return $"Name: {name}, Age: {age}";
+    } 
+    
+    public static void processUserInput(string input, int minLength)
+    {
+        // Write your code here
+        Console.WriteLine(String.IsNullOrWhiteSpace(input) || input.Length < minLength ? "Invalid input" : $"Valid input: {input}");
+    }
+    
+    public static void safeDataAccess(string[]? data, int index)
+    {
+        // Write your code here
+        if (index < 0 || index >= data.Length)
+        {
+            Console.WriteLine("Invalid access attempt");
+            return;
+        }
+        if(String.IsNullOrWhiteSpace(data[index]))
+        {
+            Console.WriteLine("Invalid access attempt");
+            return;
+        }
+        
+        Console.WriteLine($"Valid data: {data[index]}");
+    }
+    
     public static void Main(String[] args)
     {
-        Console.WriteLine(processPersonInfo("Dave","null", 18));
+        string nameInput = Console.ReadLine();
+        string ageInput = Console.ReadLine();
+        
+        // Handle the case where the input is the string "null"
+        string name = nameInput == "null" ? null : nameInput;
+        
+        int? age = null;
+        if (ageInput != "null")
+        {
+            age = int.Parse(ageInput);
+        }
+        
+        string result = SafelyProcessData(name, age);
+        Console.WriteLine(result);    
     }
 }
