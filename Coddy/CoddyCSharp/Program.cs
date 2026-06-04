@@ -965,21 +965,65 @@ class Program
         Console.WriteLine($"Valid data: {data[index]}");
     }
     
+    public static int getSafeValue(int? value, int defaultValue)
+    {
+        // Write your code here
+        return value ?? defaultValue;
+    }
+    
+    public static void processNames(string[] names)
+    {
+        // Write your solution here
+        foreach (string name in names)
+        {
+            if(name == null || name == "null") Console.WriteLine("null is present");
+            else Console.WriteLine($"\"{name}\" is present");
+        }
+    }
+    
+    public static string analyzeInput(string text, int? value, bool condition)
+    {
+        // Write your code here
+        string result = "";
+        if ((text != null || text != "null") && text.Length > 3) result += "Text valid: True\n";
+        else result += "Text valid: False\n";
+        result += $"Value used: {value ?? 100}\n";
+        result += $"Expression 1: {condition || text.Length > 5 && value > 50}\n";
+        result += $"Expression 1: {(condition || text.Length > 5) && value > 50}";
+        return result;
+    }
+    
+    public static int[][] CreateScoreGrid(int students, int assignments)
+    {
+        // Write your code here
+        int[][] scores = new int[students][];
+
+        for (int i = 0; i < students; i++)
+        {
+            scores[i] = new int[assignments];
+        }
+
+        return scores;
+    }
+    
+    public static bool ValidateScore(int score)
+    {
+        // Write your code here
+        return score >= 0 && score <= 100;
+    }
+    
+    public static int[][] PopulateWithDefaultValues(int[][] scoreGrid)
+    {
+        // Write your code here
+        for(int i = 0;i <  scoreGrid.Length;i++)
+            for(int j = 0; j <  scoreGrid[i].Length;j++)
+                scoreGrid[i][j] = -1;
+        
+        return scoreGrid;
+    }
+    
     public static void Main(String[] args)
     {
-        string nameInput = Console.ReadLine();
-        string ageInput = Console.ReadLine();
-        
-        // Handle the case where the input is the string "null"
-        string name = nameInput == "null" ? null : nameInput;
-        
-        int? age = null;
-        if (ageInput != "null")
-        {
-            age = int.Parse(ageInput);
-        }
-        
-        string result = SafelyProcessData(name, age);
-        Console.WriteLine(result);    
+        Console.WriteLine(analyzeInput("Hello",75,false));
     }
 }
