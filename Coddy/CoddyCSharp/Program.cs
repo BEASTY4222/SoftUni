@@ -4,6 +4,7 @@ using System.Buffers;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
+using System.Collections;
 
 
 class Program
@@ -11,10 +12,10 @@ class Program
 
     private static void StringMethodsPartTwo()
     {
-        string res = Console.ReadLine();
-        string delimiter = Console.ReadLine();
+        string? res = Console.ReadLine();
+        string? delimiter = Console.ReadLine();
 
-        res = res.Replace(" ", delimiter);
+        res = res?.Replace(" ", delimiter);
 
         Console.WriteLine(res);
     }
@@ -27,11 +28,11 @@ class Program
 
     private static void UsingForLoop()
     {
-        string text = Console.ReadLine();
-        string[] arr = text.Split(',');
+        string? text = Console.ReadLine();
+        string[]? arr = text?.Split(',');
 
         List<string> result = new List<string>();
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < arr?.Length; i++)
             if (arr[i].Length > 5)
                 result.Add(arr[i]);
 
@@ -68,17 +69,17 @@ class Program
 
     private static void NumberPatern()
     {
-        int n = int.Parse(Console.ReadLine());
+        int? n = int.Parse(Console.ReadLine());
         for (int i = 1; i <= n; i += 2) Console.WriteLine(new string('*', i));
     }
 
     private static void PatternFinder()
     {
-        string arrString1 = Console.ReadLine();
-        string arrString2 = Console.ReadLine();
-        string[] str1 = arrString1.Split(",");
-        string[] str2 = arrString2.Split(",");
-        Console.WriteLine(arrString1.Contains(arrString2));
+        string? arrString1 = Console.ReadLine();
+        string? arrString2 = Console.ReadLine();
+        string[]? str1 = arrString1?.Split(",");
+        string[]? str2 = arrString2?.Split(",");
+        Console.WriteLine(arrString1?.Contains(arrString2));
     }
 
     private static double CalculateAverageGrade(int[] grades)
@@ -993,216 +994,6 @@ class Program
         return result;
     }
     
-    public class DataCollector
-    {
-            public static int[][] CreateScoreGrid(int students, int assignments)
-        {
-            // Write your code here
-            int[][] scores = new int[students][];
-
-            for (int i = 0; i < students; i++)
-            {
-                scores[i] = new int[assignments];
-            }
-
-            return scores;
-        }
-        
-        public static bool ValidateScore(int? score)
-        {
-            // Write your code here
-            return score >= 0 && score <= 100;
-        }
-        
-        public static int[][] PopulateWithDefaultValues(int[][] scoreGrid)
-        {
-            // Write your code here
-            for(int i = 0;i <  scoreGrid.Length;i++)
-                for(int j = 0; j <  scoreGrid[i].Length;j++)
-                    scoreGrid[i][j] = -1;
-            
-            return scoreGrid;
-        }
-    }
-
-    public class DataEntry : DataCollector{
-        public static int SetStudentScore(int[][] scoreGrid, int studentIndex, int assignmentIndex, int? score)
-        {
-            if(score == null || !ValidateScore(score)) return -2;
-            try
-            {
-                scoreGrid[studentIndex][assignmentIndex] = score.Value;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return -1;
-            }
-
-            return 0;
-        }
-
-        public static int UpdateAllScores(int[][] scoreGrid, int[] studentIndices, int assignmentIndex, int score)
-        {
-            int counter = 0;
-            for(int i = 0;i < studentIndices.Length; i++)
-            {
-                if (SetStudentScore(scoreGrid,studentIndices[i],assignmentIndex,score) == 0)
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }
-    }
-
-    public class DataAnalyzer : DataEntry
-    {
-        public static int CalculateStudentAverage(int[][] scoreGrid, int studentIndex)
-        {
-            int average = 0;
-            int counter = 0;
-            try{
-                for(int i = 0; i < scoreGrid[studentIndex].Length; i++)
-                {
-                    if(scoreGrid[studentIndex][i] <= 0)
-                        continue;
-
-                    if(ValidateScore(scoreGrid[studentIndex][i]))
-                    {
-                        average += scoreGrid[studentIndex][i];
-                        counter++;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                }
-            }catch(IndexOutOfRangeException){return -1;}
-            return counter > 0 ? average / counter : 0;
-        }
-
-        public static int CalculateAssignmentAverage(int[][] scoreGrid, int assignmentIndex)
-        {
-            int counter = 0;
-            int average = 0;
-
-            for (int i = 0; i < scoreGrid.Length; i++)
-            {
-                if (assignmentIndex >= scoreGrid[i].Length)
-                    return -1;
-
-                int score = scoreGrid[i][assignmentIndex];
-
-                if (score <= 0)
-                    continue;
-
-                if (!ValidateScore(score))
-                    return -1;
-
-                average += score;
-                counter++;
-            }
-
-            return counter > 0 ? average / counter : 0;
-        }
-
-        public static int[] FindHighestScore(int[][] scoreGrid)
-        {
-            int score = 0, indexS = 0, indexA = 0;
-
-            try
-            {
-                for(int i = 0;i < scoreGrid.Length; i++)
-                {
-                    for (int j = 0;j < scoreGrid[i].Length;j++)
-                    {
-                        if(scoreGrid[i][j] > score)
-                        {
-                            score = scoreGrid[i][j];
-                            indexS = i;
-                            indexA = j;
-                        }
-                    }
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return new int[]{0,0,0};
-            }
-
-            return new int[]{indexS, indexA,score};
-        }
-    }
-
-    public class GradingSystem : DataAnalyzer
-    {
-        public static string ConvertToLetterGrade(double? score)
-        {
-            if(score == null || !ValidateScore((int)score))
-                return "N/A";
-        
-            if(score >= 90 && score <= 100) return "A";
-            if(score >= 80 && score <= 89) return "B";
-            if(score >= 70 && score <= 79) return "C";
-            if(score >= 60 && score <= 69) return "D";
-            
-            return "F";
-        }
-
-        public static string GetStudentGrade(int[][] scoreGrid, int studentIndex)
-        {
-            return ConvertToLetterGrade(CalculateStudentAverage(scoreGrid,studentIndex));
-        }
-
-        public static int[] GetClassDistribution(int[][] scoreGrid)
-        {
-            // [A, B, C, D, F]
-            int[] distribution = new int[5];
-
-            for (int i = 0; i < scoreGrid.Length; i++)
-            {
-                string grade = GetStudentGrade(scoreGrid, i);
-
-                switch (grade)
-                {
-                    case "A":
-                        distribution[0]++;
-                        break;
-
-                    case "B":
-                        distribution[1]++;
-                        break;
-
-                    case "C":
-                        distribution[2]++;
-                        break;
-
-                    case "D":
-                        distribution[3]++;
-                        break;
-
-                    case "F":
-                        distribution[4]++;
-                        break;
-                }
-            }
-
-            return distribution;
-        }
-    }
-
-    public class ReportGenerator : GradingSystem
-    {
-        public static string GenerateStudentReport(int[][] scoreGrid, int studentIndex)
-        {
-            //Student #X | Average: YY.Y | Grade: Z\nAssignment scores: S1, S2, S3, ...
-            string result = $"Student #{studentIndex} | Average: {CalculateStudentAverage(scoreGrid,studentIndex):F1} | Grade: \n";
-
-
-
-            return result;
-        }
-    }
     
     public static void Main(String[] args)
     {
