@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 
 class Program
@@ -994,9 +995,225 @@ class Program
         return result;
     }
     
+    public static Dictionary<string, int> CreateFruitInventory()
+    {
+        // Write your code here
+        Dictionary<string, int> fruitInventory = new Dictionary<string, int>()
+        {
+            { "Apple", 5 },
+            { "Banana", 10 },
+            { "Orange", 7}
+        };
+        
+        return fruitInventory;
+    }
     
+    public static void CheckKeyExists(Dictionary<string, int> dictionary, string key)
+    {
+        // Write code here
+        Console.WriteLine(dictionary.ContainsKey(key) ? "Key exists" : "Key does not exist");
+    }
+    
+    public static void GetValueByKey(Dictionary<string, int> dictionary, string key)
+    {
+        // Write code here
+        try
+        {
+            Console.WriteLine(dictionary[key]);
+        }
+        catch (KeyNotFoundException)
+        {
+            Console.WriteLine("Key not found");
+        }
+    }
+    
+    public static void UpdateInventory(Dictionary<string, int> inventory, string item, int quantity)
+    {
+        // Write your code here
+        inventory[item] = quantity;
+        // Print the updated inventory
+        // Don't remove this
+        foreach (KeyValuePair<string, int> entry in inventory)
+        {
+            Console.WriteLine($"{entry.Key}: {entry.Value}");
+        }
+    }
+    
+    public static Dictionary<string, int> ProcessDictionary(Dictionary<string, int> data, string[] operations)
+    {
+        // Write your code here
+        foreach (string operation in operations)
+        {
+            string[] keyValue = operation.Split(' ');
+            
+            if (operation.Contains("GET"))
+            {
+                Console.WriteLine(data.ContainsKey(keyValue[1]) ? data[keyValue[1]].ToString() : "Key does not exist");
+            }
+            else if (operation.Contains("CHECK"))
+            {
+                Console.WriteLine(data.ContainsKey(keyValue[1]) ? "Exists" : "Not found");
+            }
+            else if (operation.Contains("MODIFY"))
+            {
+                if (data.ContainsKey(keyValue[1]))
+                {
+                    if (data[keyValue[1]] == int.Parse(keyValue[2]))
+                    {
+                        data[keyValue[1]]++;
+                    }
+                    else
+                    {
+                        data.Remove(keyValue[1]);
+                    }
+                }
+                else
+                {
+                    data[keyValue[1]] =  int.Parse(keyValue[2]);
+                }
+            }
+        }
+        
+        return data;
+    }
+
+    static void ProcessDictionary(Dictionary<string, int> dict)
+    {
+        // Write your code here
+        Dictionary<string, int>.KeyCollection keys = dict.Keys;
+        Console.WriteLine("Keys: ");
+        foreach (string name in keys)
+        {
+            Console.WriteLine(name);
+        }
+        
+        // Get all values
+        Console.WriteLine("Values: ");
+        Dictionary<string, int>.ValueCollection values = dict.Values;
+        foreach (int score in values)
+        {
+            Console.WriteLine(score);
+        }
+
+        Console.WriteLine($"Contains 'total': {dict.ContainsKey("total")}");
+        
+        dict.Remove("temp");
+        
+        Console.WriteLine($"Count: {dict.Count}");
+    }
+    
+    public static void AddCourseGrade(Dictionary<string, Dictionary<string, int>> grades, string student, string course, int grade)
+    {
+        // Write your code here
+        try
+        {
+            grades[student][course] = grade;
+        }
+        catch (KeyNotFoundException)
+        {
+            Dictionary<string, int> studentGrades = new Dictionary<string, int>();
+            studentGrades.Add(course, grade);
+            grades.Add(student, studentGrades);
+        }
+        
+        Console.WriteLine($"Added {course} grade for {student}: {grade}");
+    }
+    
+    public static Dictionary<string, int> ManageWarehouse(Dictionary<string, int> inventory)
+    {
+        // Your code here
+        foreach (var elem in inventory)
+        {
+            Console.WriteLine($"Item: {elem.Key}, Quantity: {elem.Value}");
+        }
+
+        Console.WriteLine($"Apples in stock: {inventory.ContainsKey("apples")}");
+        if (inventory.ContainsKey("bananas")) inventory["bananas"] += 10;
+        
+        var keysToRemove = new List<string>();
+
+        foreach (var elem in inventory)
+        {
+            if (elem.Value <= 0)
+            {
+                keysToRemove.Add(elem.Key);
+            }
+        }
+
+        foreach (var key in keysToRemove)
+        {
+            inventory.Remove(key);
+        }
+
+        Console.WriteLine($"Total distinct items: {inventory.Count}");
+        
+        return inventory;
+    }
+    /*Unhandled Exception:
+System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.Dictionary`2+Enumerator[TKey,TValue].MoveNext () [0x00013] in <de882a77e7c14f8ba5d298093dde82b2>:0 
+  at Program.ManageWarehouse (System.Collections.Generic.Dictionary`2[TKey,TValue] inventory) [0x000cf] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
+  at Program.Main (System.String[] args) [0x0012e] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
+[ERROR] FATAL UNHANDLED EXCEPTION: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.Dictionary`2+Enumerator[TKey,TValue].MoveNext () [0x00013] in <de882a77e7c14f8ba5d298093dde82b2>:0 
+  at Program.ManageWarehouse (System.Collections.Generic.Dictionary`2[TKey,TValue] inventory) [0x000cf] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
+  at Program.Main (System.String[] args) [0x0012e] in <26e491cb79a8477d8c73267e0d1cc42a>:0 */
     public static void Main(String[] args)
     {
-        Console.WriteLine(analyzeInput("Hello",75,false));
+        // Check if first line might be JSON
+        Dictionary<string, int> inventory = new Dictionary<string, int>();
+        
+        // Read first line to check if it's JSON format
+        string firstLine = Console.ReadLine();
+        
+        // Check if input is in JSON format
+        if (firstLine != null && firstLine.StartsWith("{") && firstLine.EndsWith("}"))
+        {
+            try
+            {
+                // Process JSON input
+                string jsonContent = firstLine.Substring(1, firstLine.Length - 2);
+                
+                // Split by commas that are not inside quotes
+                string pattern = @",(?=(?:[^""]*""[^""]*"")*[^""]*$)";
+                string[] entries = Regex.Split(jsonContent, pattern);
+                
+                foreach (string entry in entries)
+                {
+                    // Extract key and value using regex
+                    Match match = Regex.Match(entry, @"""([^""]+)""\s*:\s*(\d+)");
+                    if (match.Success)
+                    {
+                        string keyMatch = match.Groups[1].Value;
+                        int valueMatch = int.Parse(match.Groups[2].Value);
+                        inventory.Add(keyMatch, valueMatch);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error parsing JSON input: {ex.Message}");
+                return;
+            }
+        }
+        else
+        {
+            // Process traditional input format
+            int n = int.Parse(firstLine);
+            for (int i = 0; i < n; i++)
+            {
+                string[] parts = Console.ReadLine().Split(':');
+                inventory.Add(parts[0], int.Parse(parts[1]));
+            }
+        }
+        
+        Dictionary<string, int> result = ManageWarehouse(inventory);
+        
+        // Print updated inventory
+        Console.WriteLine("Updated Inventory:");
+        foreach (var item in result)
+        {
+            Console.WriteLine($"{item.Key}: {item.Value}");
+        }
     }
 }
