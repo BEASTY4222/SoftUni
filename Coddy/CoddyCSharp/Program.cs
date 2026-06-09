@@ -1149,45 +1149,143 @@ class Program
         
         return inventory;
     }
-    /*Unhandled Exception:
-System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
-  at System.Collections.Generic.Dictionary`2+Enumerator[TKey,TValue].MoveNext () [0x00013] in <de882a77e7c14f8ba5d298093dde82b2>:0 
-  at Program.ManageWarehouse (System.Collections.Generic.Dictionary`2[TKey,TValue] inventory) [0x000cf] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
-  at Program.Main (System.String[] args) [0x0012e] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
-[ERROR] FATAL UNHANDLED EXCEPTION: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
-  at System.Collections.Generic.Dictionary`2+Enumerator[TKey,TValue].MoveNext () [0x00013] in <de882a77e7c14f8ba5d298093dde82b2>:0 
-  at Program.ManageWarehouse (System.Collections.Generic.Dictionary`2[TKey,TValue] inventory) [0x000cf] in <26e491cb79a8477d8c73267e0d1cc42a>:0 
-  at Program.Main (System.String[] args) [0x0012e] in <26e491cb79a8477d8c73267e0d1cc42a>:0 */
+
+    public static Dictionary<string, int> ProcessDictionary(Dictionary<string, int> inventory, List<string> operations)
+    {
+        // Your code here
+        foreach(string fullOp in operations)
+        {
+            string[] ops = fullOp.Split(' ');
+
+            if (ops[0] == "COUNT")
+            {
+                Console.WriteLine($"Total items: {inventory.Count}");
+                Console.WriteLine("Operation COUNT performed successfully");
+            }else if (ops[0] == "ADD")
+            {
+                if (inventory.ContainsKey(ops[1]))
+                {
+                    inventory[ops[1]] += int.Parse(ops[2]);
+                    Console.WriteLine("Operation ADD performed successfully");
+                }
+                else
+                {
+                    inventory.Add(ops[1] ,int.Parse(ops[2]));
+                }
+            }else if (ops[0] == "REMOVE")
+            {
+                if (inventory.ContainsKey(ops[1]))
+                {
+                    inventory.Remove(ops[1]);
+                    Console.WriteLine("Operation REMOVE performed successfully");
+                }else Console.WriteLine("Operation REMOVE failed: Item not found");
+            }else if (ops[0] == "UPDATE")
+            {
+                if (inventory.ContainsKey(ops[1]))
+                {
+                    inventory[ops[1]] += int.Parse(ops[2]);
+                    Console.WriteLine("Operation UPDATE performed successfully");                
+                }
+            }else if (ops[0] == "FIND")
+            {
+                if (inventory.ContainsKey(ops[1]))
+                {
+                    Console.WriteLine($"{ops[1]}: {inventory[ops[1]]}");
+                    Console.WriteLine("Operation UPDATE performed successfully");
+                }
+            }
+        }
+        
+        return inventory;
+    }
+
+    public static void AddElement(HashSet<string> set, string element)
+    {
+        // Write your code here
+        set.Add(element);
+
+        Console.WriteLine("{"+String.Join(", ",set)+"}");
+    }
+
+    public static void RemoveElement(HashSet<string> set, string element)
+    {
+        // Write your code here
+        Console.WriteLine($"Element removed: {set.Remove(element)}");
+        Console.WriteLine(String.Join(", ",set));
+    }
+
+    public static string ElementExists(HashSet<string> set, string element)
+    {
+        // Write your code here
+        string result = $"The element '{element}'";
+        if(set.Contains(element)) result += " exists in the set";
+        else result += " does not exist in the set";
+        return result;
+    }
+
+    public static void CountAndCheck(HashSet<string> set)
+    {
+        // Write your code here
+        if(set.Count == 0) Console.WriteLine("Empty set");
+        else Console.WriteLine($"Set contains {set.Count} elements");
+    }
+
+    public static HashSet<string> ProcessHashSet()
+    {
+        // Write your code here
+        HashSet<string> set = new HashSet<string>();
+        set.Add("Apple");
+        set.Add("Banana");
+        set.Add("Orange");
+
+        Console.WriteLine($"Contains Mango: {set.Contains("Mango")}");
+        Console.WriteLine($"Added Apple again: {set.Add("Apple")}");
+        Console.WriteLine($"Removed Banana: {set.Remove("Banana")}");
+        Console.WriteLine($"Count: {set.Count}");
+
+        return set;
+    }
+
     public static void Main(String[] args)
     {
-        // Check if first line might be JSON
-        Dictionary<string, int> inventory = new Dictionary<string, int>();
+        HashSet<string> set = new HashSet<string>();
         
         // Read first line to check if it's JSON format
         string firstLine = Console.ReadLine();
+        string elementToRemove;
         
-        // Check if input is in JSON format
-        if (firstLine != null && firstLine.StartsWith("{") && firstLine.EndsWith("}"))
+        // Check if input is in JSON array format
+        if (firstLine != null && firstLine.StartsWith("[") && firstLine.EndsWith("]"))
         {
             try
             {
-                // Process JSON input
-                string jsonContent = firstLine.Substring(1, firstLine.Length - 2);
+                // Extract content between square brackets
+                string arrayContent = firstLine.Substring(1, firstLine.Length - 2);
                 
-                // Split by commas that are not inside quotes
-                string pattern = @",(?=(?:[^""]*""[^""]*"")*[^""]*$)";
-                string[] entries = Regex.Split(jsonContent, pattern);
+                // Use regex to match all quoted strings
+                MatchCollection matches = Regex.Matches(arrayContent, @"""([^""]*)""");
                 
-                foreach (string entry in entries)
+                foreach (Match match in matches)
                 {
-                    // Extract key and value using regex
-                    Match match = Regex.Match(entry, @"""([^""]+)""\s*:\s*(\d+)");
-                    if (match.Success)
+                    // Add the captured group (without quotes)
+                    if (match.Groups.Count > 1)
                     {
-                        string keyMatch = match.Groups[1].Value;
-                        int valueMatch = int.Parse(match.Groups[2].Value);
-                        inventory.Add(keyMatch, valueMatch);
+                        set.Add(match.Groups[1].Value.Trim());
                     }
+                }
+                
+                // Read second line for element to remove
+                string secondLine = Console.ReadLine();
+                
+                // Check if element is in JSON string format
+                Match elementMatch = Regex.Match(secondLine, @"""([^""]*)""");
+                if (elementMatch.Success && elementMatch.Groups.Count > 1)
+                {
+                    elementToRemove = elementMatch.Groups[1].Value;
+                }
+                else
+                {
+                    elementToRemove = secondLine;
                 }
             }
             catch (Exception ex)
@@ -1199,21 +1297,16 @@ System.InvalidOperationException: Collection was modified; enumeration operation
         else
         {
             // Process traditional input format
-            int n = int.Parse(firstLine);
-            for (int i = 0; i < n; i++)
+            string[] elements = firstLine.Split(',');
+            foreach (string element in elements)
             {
-                string[] parts = Console.ReadLine().Split(':');
-                inventory.Add(parts[0], int.Parse(parts[1]));
+                set.Add(element.Trim());
             }
+            
+            // Read element to remove in traditional format
+            elementToRemove = Console.ReadLine();
         }
         
-        Dictionary<string, int> result = ManageWarehouse(inventory);
-        
-        // Print updated inventory
-        Console.WriteLine("Updated Inventory:");
-        foreach (var item in result)
-        {
-            Console.WriteLine($"{item.Key}: {item.Value}");
-        }
+        RemoveElement(set, elementToRemove);
     }
 }
