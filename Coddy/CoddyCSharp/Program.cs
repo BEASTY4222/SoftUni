@@ -1245,68 +1245,241 @@ class Program
 
         return set;
     }
+    
+    //*******************************************************************************************
+    // OOP MODULE FROM HERE DOWN
+    //*******************************************************************************************
+    public class Car
+    {
+        public string Brand { get; set; }
+        public int Year { get; set; }
+    
+        // TODO: Add a constructor that takes brand and year parameters
+        public Car(string brand, int year)
+        {
+            Brand = brand;
+            Year = year;
+        }
+        // TODO: Add a Drive() method that returns a string
+        public string Drive()
+        {
+            return $"The {Brand} is driving!";
+        }
+    }
+    
+    public class Product
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+    
+        // TODO: Create a constructor with parameters 'name' and 'price'
+        // Use 'this' keyword to assign values to properties
+        public Product(string name, decimal price)
+        {
+            this.Name = name;
+            this.Price = price;
+        }
+    
+        public string GetDescription()
+        {
+            // TODO: Use 'this' keyword to access Name and Price
+            return $"{this.Name} costs ${this.Price}";
+        }
+    }
+    
+    public class CalculatorA
+    {
+        // TODO: Create an Add method that takes two int parameters and returns their sum
+        public int Add(int num1, int num2)
+        {
+            return num1 + num2;
+        }
+        // TODO: Create a Subtract method that takes two int parameters and returns their difference
+        public int Subtract(int num1, int num2)
+        {
+            return num1 - num2;
+        }
+        // TODO: Create a Multiply method that takes two int parameters and returns their product
+        public int Multiply(int num1, int num2)
+        {
+            return num1 * num2;
+        }
+    }
+    
+    public class BankAccount
+    {
+        // TODO: Create a private field 'balance' of type decimal
+        private decimal balance;
+        // TODO: Create an auto-implemented property 'AccountName' (string)
+        public string AccountName { get; set; }
+        // TODO: Create a property 'Balance' with only a get accessor that returns the balance field
+        public decimal Balance { get; }
 
+        public BankAccount(string accountName, decimal initialBalance)
+        {
+            // TODO: Set AccountName and balance field
+            AccountName = accountName;
+            balance = initialBalance;
+        }
+    
+        public void Deposit(decimal amount)
+        {
+            // TODO: Add amount to balance field if amount > 0
+            if (0 < amount) balance +=  amount;
+        }
+    
+        public string Withdraw(decimal amount)
+        {
+            // TODO: If amount > 0 and amount <= balance, subtract from balance and return "Success"
+            // Otherwise return "Insufficient funds"
+            string result = "Success";
+            if (amount > 0 && amount <= balance) balance -= amount;
+            else result = "Insufficient funds";
+            return result;
+        }
+    }
+    
+    public class ProductA
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Stock { get; set; }
+    
+        // TODO: Create a constructor with three parameters (string name, decimal price, int stock)
+        // Initialize all properties
+        public ProductA(string name, decimal price, int stock)
+        {
+            this.Name = name;
+            this.Price = price;
+            this.Stock = stock;
+        }
+    
+        // TODO: Create a constructor with two parameters (string name, decimal price)
+        // Use constructor chaining with 'this' to call the first constructor with stock = 0
+        public ProductA(string name, decimal price)
+        {
+            this.Name = name;
+            this.Price = price;
+            this.Stock = 0;
+        }
+    
+        // TODO: Create a default constructor with no parameters
+        // Use constructor chaining with 'this' to call the second constructor with name = "Unknown" and price = 0
+        public ProductA()
+        {
+            this.Name = "Unknown";
+            this.Price = 0;
+        }
+    }
+    
+    
+    public class Calculator
+    {
+        // TODO: Create a private field 'memory' to store a decimal value
+        private decimal memory;
+        // TODO: Create a private field 'operationCount' to track number of operations
+        private int operationCount;
+        // TODO: Create an auto-implemented property 'Name' (string)
+        public string Name { get; set; }
+        // TODO: Create a read-only property 'Memory' that returns the memory field
+        public decimal Memory => memory;
+        
+        // TODO: Create a read-only property 'OperationCount' that returns the operationCount field
+        public int OperationCount => operationCount;
+        // TODO: Create a constructor with parameter 'name' that initializes Name and sets memory and operationCount to 0
+        public Calculator(string name)
+        {
+            this.Name = name;
+            this.memory = 0;
+            this.operationCount = 0;
+        }
+        // TODO: Create a default constructor that uses 'this' to call the other constructor with "Default" as name
+        public Calculator() : this("Default")
+        { 
+            
+        }
+        // TODO: Create an Add method that takes two decimal parameters and returns their sum
+        // Increment operationCount and store result in memory
+        public decimal Add(decimal num1, decimal num2)
+        {
+            memory = num1 + num2;
+            operationCount++;
+            return num1 + num2;
+        }
+        // TODO: Create a Subtract method that takes two decimal parameters and returns their difference
+        // Increment operationCount
+        public decimal Subtract(decimal num1, decimal num2)
+        {
+            operationCount++;
+            return num1 - num2;
+        }
+        // TODO: Create a Multiply method that takes two decimal parameters and returns their product
+        // Increment operationCount
+        public decimal Multiply(decimal num1, decimal num2)
+        {
+            operationCount++;
+            return num1 * num2;
+        }
+        // TODO: Create a Divide method that takes two decimal parameters and returns their quotient
+        // Increment operationCount and handle division by zero (return 0 if divisor is 0)
+        public decimal Divide(decimal num1, decimal num2)
+        {
+            if (num2 == 0) return 0;
+            operationCount++;
+            return num1 / num2;
+        }
+        // TODO: Create a Power method that takes two decimal parameters (base and exponent)
+        // Returns base raised to the power of exponent using Math.Pow
+        // Increment operationCount
+        public decimal Power(decimal num, decimal exponent)
+        {
+            operationCount++;
+            return (decimal)Math.Pow((double)num, (double)exponent);
+        }
+        // TODO: Create a SquareRoot method that takes one decimal parameter
+        // Returns the square root using Math.Sqrt
+        // Increment operationCount
+        public decimal SquareRoot(decimal num)
+        {
+            operationCount++;
+            return (decimal)Math.Sqrt((double)num);
+        }
+    }
+
+    
     public static void Main(String[] args)
     {
-        HashSet<string> set = new HashSet<string>();
+        string name = Console.ReadLine();
+        decimal num1 = decimal.Parse(Console.ReadLine());
+        decimal num2 = decimal.Parse(Console.ReadLine());
         
-        // Read first line to check if it's JSON format
-        string firstLine = Console.ReadLine();
-        string elementToRemove;
+        // Create calculator using constructor with name
+        Calculator calc = new Calculator(name);
         
-        // Check if input is in JSON array format
-        if (firstLine != null && firstLine.StartsWith("[") && firstLine.EndsWith("]"))
-        {
-            try
-            {
-                // Extract content between square brackets
-                string arrayContent = firstLine.Substring(1, firstLine.Length - 2);
-                
-                // Use regex to match all quoted strings
-                MatchCollection matches = Regex.Matches(arrayContent, @"""([^""]*)""");
-                
-                foreach (Match match in matches)
-                {
-                    // Add the captured group (without quotes)
-                    if (match.Groups.Count > 1)
-                    {
-                        set.Add(match.Groups[1].Value.Trim());
-                    }
-                }
-                
-                // Read second line for element to remove
-                string secondLine = Console.ReadLine();
-                
-                // Check if element is in JSON string format
-                Match elementMatch = Regex.Match(secondLine, @"""([^""]*)""");
-                if (elementMatch.Success && elementMatch.Groups.Count > 1)
-                {
-                    elementToRemove = elementMatch.Groups[1].Value;
-                }
-                else
-                {
-                    elementToRemove = secondLine;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error parsing JSON input: {ex.Message}");
-                return;
-            }
-        }
-        else
-        {
-            // Process traditional input format
-            string[] elements = firstLine.Split(',');
-            foreach (string element in elements)
-            {
-                set.Add(element.Trim());
-            }
-            
-            // Read element to remove in traditional format
-            elementToRemove = Console.ReadLine();
-        }
+        Console.WriteLine($"Calculator: {calc.Name}");
+        Console.WriteLine($"Memory: {calc.Memory}");
         
-        RemoveElement(set, elementToRemove);
+        // Perform operations
+        decimal addResult = calc.Add(num1, num2);
+        Console.WriteLine($"Add: {addResult}");
+        
+        decimal subtractResult = calc.Subtract(num1, num2);
+        Console.WriteLine($"Subtract: {subtractResult}");
+        
+        decimal multiplyResult = calc.Multiply(num1, num2);
+        Console.WriteLine($"Multiply: {multiplyResult}");
+        
+        decimal divideResult = calc.Divide(num1, num2);
+        Console.WriteLine($"Divide: {divideResult}");
+        
+        Console.WriteLine($"Memory after operations: {calc.Memory}");
+        
+        decimal powerResult = calc.Power(num1, num2);
+        Console.WriteLine($"Power: {powerResult}");
+        
+        decimal sqrtResult = calc.SquareRoot(num2);
+        Console.WriteLine($"Square Root: {sqrtResult}");
+        
+        Console.WriteLine($"History: {calc.OperationCount} operations");
     }
 }
