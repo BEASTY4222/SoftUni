@@ -1445,41 +1445,83 @@ class Program
             return (decimal)Math.Sqrt((double)num);
         }
     }
+    
+    public class ServerConfig
+    {
+        // TODO: Create a private field to store the API key
+        private string APIKey;
+        // TODO: Create a read-only property ServerName (set only in constructor)
+        public string serverName { get; }
+        // TODO: Create a read-only property Port with a private setter
+        private int port;
+        public int Port => port;
 
+        private void setPort(int port)
+        {
+            this.port = port;
+        }
+        // TODO: Create a write-only property ApiKey that stores the key internally
+        public string apiKey {
+            set => APIKey = value;
+        }
+        // TODO: Create a constructor that accepts serverName and port
+        public ServerConfig(string serverName, int port)
+        {
+            this.serverName = serverName;
+            this.port = port;
+        }
+        // TODO: Create a method ValidateApiKey(string key) that returns true if key matches stored key
+        public bool ValidateApiKey(string key)
+        {
+            return key == APIKey;
+        }
+    }
+    
+    public class Order
+    {
+        // TODO: Define instance properties
+        // - OrderId (int)
+        // - CustomerName (string)
+        public int orderId { get; set; }
+        public string customerName { get; set; }
+
+        // TODO: Define a static field to track TotalOrders
+        public static int totalOrders { get;set;}
+        // TODO: Define a static method GetNextOrderId() that returns the next available order ID (starting from 1)
+        public static int GetNextOrderId()
+        {
+            return totalOrders++;
+        }
+
+        // TODO: Create a constructor that:
+        // - Accepts a customer name parameter
+        // - Automatically assigns OrderId using GetNextOrderId()
+        // - Increments the TotalOrders count
+
+        public Order(string  customerName)
+        {
+            totalOrders = 1;
+            this.customerName = customerName;
+            this.orderId = totalOrders;
+            totalOrders++;
+        }
+    }
     
     public static void Main(String[] args)
     {
-        string name = Console.ReadLine();
-        decimal num1 = decimal.Parse(Console.ReadLine());
-        decimal num2 = decimal.Parse(Console.ReadLine());
-        
-        // Create calculator using constructor with name
-        Calculator calc = new Calculator(name);
-        
-        Console.WriteLine($"Calculator: {calc.Name}");
-        Console.WriteLine($"Memory: {calc.Memory}");
-        
-        // Perform operations
-        decimal addResult = calc.Add(num1, num2);
-        Console.WriteLine($"Add: {addResult}");
-        
-        decimal subtractResult = calc.Subtract(num1, num2);
-        Console.WriteLine($"Subtract: {subtractResult}");
-        
-        decimal multiplyResult = calc.Multiply(num1, num2);
-        Console.WriteLine($"Multiply: {multiplyResult}");
-        
-        decimal divideResult = calc.Divide(num1, num2);
-        Console.WriteLine($"Divide: {divideResult}");
-        
-        Console.WriteLine($"Memory after operations: {calc.Memory}");
-        
-        decimal powerResult = calc.Power(num1, num2);
-        Console.WriteLine($"Power: {powerResult}");
-        
-        decimal sqrtResult = calc.SquareRoot(num2);
-        Console.WriteLine($"Square Root: {sqrtResult}");
-        
-        Console.WriteLine($"History: {calc.OperationCount} operations");
+        // Read customer names
+        string customer1 = Console.ReadLine();
+        string customer2 = Console.ReadLine();
+
+        // TODO: Create two Order objects with the customer names
+        Order order1 = new Order(customer1);
+        Order order2 = new Order(customer2);
+        // TODO: Print each order's details in the format:
+        // Order #{OrderId} - Customer: {CustomerName}
+        Console.WriteLine($"Order #{order1.orderId} - Customer: {order1.customerName}");
+        Console.WriteLine($"Order #{order2.orderId} - Customer: {order2.customerName}");
+        // TODO: Print the total orders count in the format:
+        // Total Orders: {TotalOrders}
+        Console.WriteLine($"Total Orders: {Order.totalOrders}");
     }
 }
