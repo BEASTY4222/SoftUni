@@ -1614,25 +1614,75 @@ class Program
             return (verticalVelocity * verticalVelocity)
                    / (2 * PhysicsConstants.Gravity);
         }
+    } 
+
+    public class TemperatureSensor
+    {
+        // TODO: Create backing field _location for the Location property
+        private string _location;
+        // TODO: Create backing field _temperature for the Temperature property
+        private double _temperature;
+        // TODO: Implement Location property
+        // - If value is null or empty, store "Unknown" instead
+        public string Location
+        {
+            get => _location;
+            
+            set =>_location = String.IsNullOrEmpty(value) ? "Unknown" : value;
+            
+        }
+
+        // TODO: Implement Temperature property
+        // - Clamp value between -50 and 150
+        public double Temperature
+        {
+            get => _temperature;
+            
+            set
+            {
+                if(value < -50)value = -50;
+                else if(value > 150) value = 150;
+                _temperature = value; 
+            }
+            
+        }
+
+        // TODO: Implement read-only TemperatureFahrenheit property
+        // - Calculate using formula: (celsius * 9 / 5) + 32
+        // - Use the backing field directly
+        public double TemperatureFahrenheit
+        {
+            get => (_temperature * 9 / 5) + 32;
+            
+        }
+
+        // TODO: Implement constructor that accepts location and initial temperature
+        public TemperatureSensor(string location, double temperature)
+        {
+            // TODO: Initialize properties using the parameters
+            this.Location = location;
+            this.Temperature = temperature;
+        }
     }
     
     public static void Main(String[] args)
     {
         // Read inputs
-        string name = Console.ReadLine();
-        double velocity = Convert.ToDouble(Console.ReadLine());
-        double angle = Convert.ToDouble(Console.ReadLine());
+        string location = Console.ReadLine();
+        double initialTemp = Convert.ToDouble(Console.ReadLine());
+        double updatedTemp = Convert.ToDouble(Console.ReadLine());
 
-        // TODO: Create a Projectile object with the input values
-        Projectile projectile = new Projectile(name, velocity, angle);
-        // TODO: Print the physics constants (Gravity with unit, Speed of Light)
-        Console.WriteLine($"Gravity: {PhysicsConstants.Gravity} {PhysicsConstants.GravityUnit}");
-        Console.WriteLine("Speed of Light: 299792458 m/s");
-        // TODO: Print the projectile information (Name, Initial Velocity, Launch Angle)
-        Console.WriteLine($"Projectile: {projectile.Name}");
-        Console.WriteLine($"Initial Velocity: {projectile.InitialVelocity} m/s");
-        Console.WriteLine($"Launch Angle: {projectile.LaunchAngle} degrees");
-        // TODO: Calculate and print the max height (rounded to 2 decimal places)
-        Console.WriteLine($"Max Height: {projectile.GetMaxHeight():F2} m");
+        // TODO: Create a TemperatureSensor with the location and initial temperature
+        TemperatureSensor t = new TemperatureSensor(location,initialTemp);
+        // TODO: Print the sensor location and initial temperature readings
+        // Format: "Sensor: {Location}"
+        // Format: "Temperature: {Temperature}C ({TemperatureFahrenheit}F)"
+        Console.WriteLine($"Sensor: {t.Location}");
+        Console.WriteLine($"Temperature: {t.Temperature}C ({t.TemperatureFahrenheit}F)");
+        // TODO: Update the sensor's temperature with the updated value
+        t.Temperature = updatedTemp;
+        // TODO: Print the updated temperature readings
+        // Format: "Updated Temperature: {Temperature}C ({TemperatureFahrenheit}F)"
+        Console.WriteLine($"Updated Temperature: {t.Temperature}C ({t.TemperatureFahrenheit}F)");
     }
 }
