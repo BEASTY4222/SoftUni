@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExercisePlayGround")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47d1b89a67226af9429866406e46c8ba14d7fe99")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce46ca1a1f77eb22a19c3ed130f3ac3edd12ff98")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExercisePlayGround")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExercisePlayGround")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

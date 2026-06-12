@@ -1267,14 +1267,14 @@ class Program
         }
     }
     
-    public class Product
+    public class ProductAA
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
     
         // TODO: Create a constructor with parameters 'name' and 'price'
         // Use 'this' keyword to assign values to properties
-        public Product(string name, decimal price)
+        public ProductAA(string name, decimal price)
         {
             this.Name = name;
             this.Price = price;
@@ -1486,11 +1486,12 @@ class Program
         public string customerName { get; set; }
 
         // TODO: Define a static field to track TotalOrders
-        public static int totalOrders { get;set;}
+        public static int totalOrders = 0; 
+        public int TotalOrders => totalOrders;
         // TODO: Define a static method GetNextOrderId() that returns the next available order ID (starting from 1)
         public static int GetNextOrderId()
         {
-            return totalOrders++;
+            return totalOrders;
         }
 
         // TODO: Create a constructor that:
@@ -1500,28 +1501,138 @@ class Program
 
         public Order(string  customerName)
         {
-            totalOrders = 1;
             this.customerName = customerName;
-            this.orderId = totalOrders;
+            this.orderId = totalOrders + 1;
             totalOrders++;
+        }
+    }
+    
+    public static class TemperatureConverter
+    {
+        // TODO: Define a static field AbsoluteZeroCelsius set to -273.15
+        public static double AbsoluteZeroCelsius = -273.15;
+        // TODO: Implement CelsiusToFahrenheit(double celsius)
+        // Formula: (celsius * 9 / 5) + 32
+        public static double CelsiusToFahrenheit(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
+        }
+        // TODO: Implement FahrenheitToCelsius(double fahrenheit)
+        // Formula: (fahrenheit - 32) * 5 / 9
+        public static double FahrenheitToCelsius(double fahrenheit)
+        {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+        // TODO: Implement IsAboveAbsoluteZero(double celsius)
+        // Returns true if celsius is above absolute zero
+        public static bool IsAboveAbsoluteZero(double celsius)
+        {
+            return AbsoluteZeroCelsius < celsius;
+        }
+    }
+    
+    public class Product
+    {
+        // TODO: Define auto-implemented properties Name (string) and BasePrice (decimal)
+        public string Name { get; set; }
+        public decimal BasePrice { get; set; }
+        // TODO: Create an expression-bodied constructor that sets both properties
+        // Hint: Use => syntax for single expression constructor
+        public Product(string name, decimal basePrice)
+        {
+            this.Name = name;
+            this.BasePrice = basePrice;
+        }
+        // TODO: Create an expression-bodied read-only property TaxAmount
+        // that calculates 10% of the base price
+        public decimal TaxAmount{get => BasePrice * 0.1m;}
+        // TODO: Create an expression-bodied read-only property TotalPrice
+        // that returns base price plus tax amount
+        public decimal TotalPrice{get => BasePrice +  BasePrice * 0.1m;}
+        // TODO: Create an expression-bodied method GetDiscount(decimal percentage)
+        // that returns the discount amount (base price * percentage / 100)
+        public decimal GetDiscount(decimal percentage) => (BasePrice * percentage) / 100;
+        // TODO: Create an expression-bodied method GetFinalPrice(decimal discountPercentage)
+        // that returns total price minus the discount
+        public decimal GetFinalPrice(decimal discountPercentage) => TotalPrice - GetDiscount(discountPercentage);
+    }
+    
+    public class Player
+    {
+        // TODO: Define instance fields for Username (string) and Score (int)
+        public string Name { get; set; }
+        public int Score { get; set; }
+        // TODO: Define static field GameName (string) - shared across all players
+        public static string GameName { get; set; }
+        // TODO: Define static field TotalPlayers (int) - counts all players
+        public static int TotalPlayers = 0;
+        // TODO: Create a constructor that takes username and starting score
+        // Remember to increment TotalPlayers when a new player is created
+        public Player(string name, int score)
+        {
+            this.Name = name;
+            this.Score = score;
+            TotalPlayers++;
+        }
+        // TODO: Create a static method SetGameName(string name) to set the game name
+    }
+    
+    public class PhysicsConstants
+    {
+        // TODO: Define a const field Gravity set to 9.81
+        public const double Gravity = 9.81;
+        // TODO: Define a const field SpeedOfLight set to 299792458
+        public const double SpeedOfLight = 299792458;
+        // TODO: Define a const string GravityUnit set to "m/s^2"
+        public const string GravityUnit = "m/s^2";
+    }
+    
+    public class Projectile
+    {
+        // TODO: Define a readonly field Name (string)
+        public readonly string Name;
+        // TODO: Define a readonly field InitialVelocity (double)
+        public readonly double InitialVelocity;
+        // TODO: Define a readonly field LaunchAngle (double)
+        public readonly double LaunchAngle;
+        // TODO: Create a constructor that accepts and sets all three values
+        public Projectile(string name, double initialVelocity, double launchAngle)
+        {
+            this.Name = name;
+            this.InitialVelocity = initialVelocity;
+            this.LaunchAngle = launchAngle;
+        }
+        // TODO: Implement GetMaxHeight() method
+        // Formula: (velocity^2 * sin^2(angle)) / (2 * gravity)
+        // Remember to convert degrees to radians: angle * Math.PI / 180
+        // Use PhysicsConstants.Gravity for the gravity value
+        public double GetMaxHeight()
+        {
+            double angleRadians = LaunchAngle * Math.PI / 180.0;
+            double verticalVelocity = InitialVelocity * Math.Sin(angleRadians);
+
+            return (verticalVelocity * verticalVelocity)
+                   / (2 * PhysicsConstants.Gravity);
         }
     }
     
     public static void Main(String[] args)
     {
-        // Read customer names
-        string customer1 = Console.ReadLine();
-        string customer2 = Console.ReadLine();
+        // Read inputs
+        string name = Console.ReadLine();
+        double velocity = Convert.ToDouble(Console.ReadLine());
+        double angle = Convert.ToDouble(Console.ReadLine());
 
-        // TODO: Create two Order objects with the customer names
-        Order order1 = new Order(customer1);
-        Order order2 = new Order(customer2);
-        // TODO: Print each order's details in the format:
-        // Order #{OrderId} - Customer: {CustomerName}
-        Console.WriteLine($"Order #{order1.orderId} - Customer: {order1.customerName}");
-        Console.WriteLine($"Order #{order2.orderId} - Customer: {order2.customerName}");
-        // TODO: Print the total orders count in the format:
-        // Total Orders: {TotalOrders}
-        Console.WriteLine($"Total Orders: {Order.totalOrders}");
+        // TODO: Create a Projectile object with the input values
+        Projectile projectile = new Projectile(name, velocity, angle);
+        // TODO: Print the physics constants (Gravity with unit, Speed of Light)
+        Console.WriteLine($"Gravity: {PhysicsConstants.Gravity} {PhysicsConstants.GravityUnit}");
+        Console.WriteLine("Speed of Light: 299792458 m/s");
+        // TODO: Print the projectile information (Name, Initial Velocity, Launch Angle)
+        Console.WriteLine($"Projectile: {projectile.Name}");
+        Console.WriteLine($"Initial Velocity: {projectile.InitialVelocity} m/s");
+        Console.WriteLine($"Launch Angle: {projectile.LaunchAngle} degrees");
+        // TODO: Calculate and print the max height (rounded to 2 decimal places)
+        Console.WriteLine($"Max Height: {projectile.GetMaxHeight():F2} m");
     }
 }
