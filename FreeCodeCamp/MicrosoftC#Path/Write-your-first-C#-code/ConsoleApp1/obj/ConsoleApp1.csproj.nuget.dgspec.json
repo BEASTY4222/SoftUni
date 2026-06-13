@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER69\\RiderProjects\\SoftUni\\FreeCodeCamp\\MicrosoftC#Path\\Write-your-first-C#-code\\ConsoleApp1\\ConsoleApp1.csproj": {}
+    "/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/FreeCodeCamp/MicrosoftC#Path/Write-your-first-C#-code/ConsoleApp1/ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER69\\RiderProjects\\SoftUni\\FreeCodeCamp\\MicrosoftC#Path\\Write-your-first-C#-code\\ConsoleApp1\\ConsoleApp1.csproj": {
+    "/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/FreeCodeCamp/MicrosoftC#Path/Write-your-first-C#-code/ConsoleApp1/ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER69\\RiderProjects\\SoftUni\\FreeCodeCamp\\MicrosoftC#Path\\Write-your-first-C#-code\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectUniqueName": "/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/FreeCodeCamp/MicrosoftC#Path/Write-your-first-C#-code/ConsoleApp1/ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "C:\\Users\\USER69\\RiderProjects\\SoftUni\\FreeCodeCamp\\MicrosoftC#Path\\Write-your-first-C#-code\\ConsoleApp1\\ConsoleApp1.csproj",
-        "packagesPath": "C:\\Users\\USER69\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER69\\RiderProjects\\SoftUni\\FreeCodeCamp\\MicrosoftC#Path\\Write-your-first-C#-code\\ConsoleApp1\\obj\\",
+        "projectPath": "/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/FreeCodeCamp/MicrosoftC#Path/Write-your-first-C#-code/ConsoleApp1/ConsoleApp1.csproj",
+        "packagesPath": "/home/ivan/.nuget/packages/",
+        "outputPath": "/home/ivan/UbuntoSide/UbutoVsCodeProjects/SoftUni/FreeCodeCamp/MicrosoftC#Path/Write-your-first-C#-code/ConsoleApp1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER69\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/ivan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,7 +39,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net10.0": {
@@ -61,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.109/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

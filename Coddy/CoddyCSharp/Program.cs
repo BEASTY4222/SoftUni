@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Text.RegularExpressions;
+using Inheritance;
 
 
 class Program
@@ -1249,13 +1250,13 @@ class Program
     //*******************************************************************************************
     // OOP MODULE FROM HERE DOWN
     //*******************************************************************************************
-    public class Car
+    public class CarA
     {
         public string Brand { get; set; }
         public int Year { get; set; }
     
         // TODO: Add a constructor that takes brand and year parameters
-        public Car(string brand, int year)
+        public CarA(string brand, int year)
         {
             Brand = brand;
             Year = year;
@@ -1306,7 +1307,7 @@ class Program
         }
     }
     
-    public class BankAccount
+    public class BankAccountA
     {
         // TODO: Create a private field 'balance' of type decimal
         private decimal balance;
@@ -1315,7 +1316,7 @@ class Program
         // TODO: Create a property 'Balance' with only a get accessor that returns the balance field
         public decimal Balance { get; }
 
-        public BankAccount(string accountName, decimal initialBalance)
+        public BankAccountA(string accountName, decimal initialBalance)
         {
             // TODO: Set AccountName and balance field
             AccountName = accountName;
@@ -1531,14 +1532,14 @@ class Program
         }
     }
     
-    public class Product
+    public class ProductAAAA
     {
         // TODO: Define auto-implemented properties Name (string) and BasePrice (decimal)
         public string Name { get; set; }
         public decimal BasePrice { get; set; }
         // TODO: Create an expression-bodied constructor that sets both properties
         // Hint: Use => syntax for single expression constructor
-        public Product(string name, decimal basePrice)
+        public ProductAAAA(string name, decimal basePrice)
         {
             this.Name = name;
             this.BasePrice = basePrice;
@@ -1664,25 +1665,77 @@ class Program
             this.Temperature = temperature;
         }
     }
+
+    public class BankAccount
+    {
+        // TODO: Define a const field MinimumBalance set to 100
+        public const int MININUM_BALANCE = 100;
+        // TODO: Define a static field InterestRate (decimal) initialized to 0.03m
+        public static decimal interestRate = 0.03m;
+        // TODO: Define a static field TotalAccounts (int) to track account count
+        public static int totalAccounts;
+        // TODO: Define a readonly field AccountNumber (string)
+        public readonly string accountNumber = "";
+        // TODO: Define a private backing field _ownerName
+        // TODO: Create a property OwnerName that trims whitespace when setting
+        private string _ownerName = "";
+        public string OwnerName{get => _ownerName; 
+            set
+            {
+                value = value.Trim();
+                _ownerName = value;
+            }
+        }
+        // TODO: Define a private backing field _balance
+        // TODO: Create a property Balance that prevents going below MinimumBalance
+        private decimal _balance;
+        public decimal Balance { get => _balance; 
+            set
+            {
+                if(value < MININUM_BALANCE) value = 100;   
+                _balance = value;
+            } 
+        }
+        // TODO: Create a constructor that accepts accountNumber, ownerName, and initialBalance
+        // Remember to increment TotalAccounts
+        public BankAccount(string accountNumber, string ownerName, decimal initialBalance)
+        {
+            this.accountNumber = accountNumber;
+            this.OwnerName = ownerName.Trim();
+            this.Balance = initialBalance;
+            totalAccounts++;
+        }
+        // TODO: Create a static method SetInterestRate(decimal rate)
+        public static void SetInterestRate(decimal rate) => interestRate = rate;
+        // TODO: Create a method CalculateInterest() that returns balance * interest rate
+        public decimal CalculateInterest() => this.Balance * interestRate;
+        
+    }
+
     
     public static void Main(String[] args)
     {
         // Read inputs
-        string location = Console.ReadLine();
-        double initialTemp = Convert.ToDouble(Console.ReadLine());
-        double updatedTemp = Convert.ToDouble(Console.ReadLine());
+        string message = Console.ReadLine();
+        string email = Console.ReadLine();
+        string phone = Console.ReadLine();
 
-        // TODO: Create a TemperatureSensor with the location and initial temperature
-        TemperatureSensor t = new TemperatureSensor(location,initialTemp);
-        // TODO: Print the sensor location and initial temperature readings
-        // Format: "Sensor: {Location}"
-        // Format: "Temperature: {Temperature}C ({TemperatureFahrenheit}F)"
-        Console.WriteLine($"Sensor: {t.Location}");
-        Console.WriteLine($"Temperature: {t.Temperature}C ({t.TemperatureFahrenheit}F)");
-        // TODO: Update the sensor's temperature with the updated value
-        t.Temperature = updatedTemp;
-        // TODO: Print the updated temperature readings
-        // Format: "Updated Temperature: {Temperature}C ({TemperatureFahrenheit}F)"
-        Console.WriteLine($"Updated Temperature: {t.Temperature}C ({t.TemperatureFahrenheit}F)");
+        // TODO: Create instances of all three notification types
+        // Store them in Notification variables to demonstrate polymorphism
+        
+        // TODO: Create a base Notification
+        Notification baseNotification = new Notification(message);
+        
+        // TODO: Create an EmailNotification (stored as Notification type)
+        Notification emailNotification = new EmailNotification(message, email);
+        
+        // TODO: Create an SmsNotification (stored as Notification type)
+        Notification smsNotification = new SmsNotification(message, phone);
+        
+        // TODO: Call Send() on each and print the results
+        // The overridden methods will be called due to runtime polymorphism
+        Console.WriteLine(baseNotification.Send());
+        Console.WriteLine(emailNotification.Send());
+        Console.WriteLine(smsNotification.Send());
     }
 }
