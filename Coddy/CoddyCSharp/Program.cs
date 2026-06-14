@@ -1715,27 +1715,23 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read inputs
-        string message = Console.ReadLine();
-        string email = Console.ReadLine();
-        string phone = Console.ReadLine();
+        // Read input
+        string title = Console.ReadLine();
+        string content = Console.ReadLine();
 
-        // TODO: Create instances of all three notification types
-        // Store them in Notification variables to demonstrate polymorphism
-        
-        // TODO: Create a base Notification
-        Notification baseNotification = new Notification(message);
-        
-        // TODO: Create an EmailNotification (stored as Notification type)
-        Notification emailNotification = new EmailNotification(message, email);
-        
-        // TODO: Create an SmsNotification (stored as Notification type)
-        Notification smsNotification = new SmsNotification(message, phone);
-        
-        // TODO: Call Send() on each and print the results
-        // The overridden methods will be called due to runtime polymorphism
-        Console.WriteLine(baseNotification.Send());
-        Console.WriteLine(emailNotification.Send());
-        Console.WriteLine(smsNotification.Send());
+        // TODO: Create a Report object with the title and content
+        Report report = new Report(title, content);
+        // TODO: Store the report in an IDisplayable variable
+        // TODO: Store the same report in an IPrintable variable
+        IDisplayable IDreport = report;
+        IPrintable IPreport = report;
+        // TODO: Print the display version by calling Render() on IDisplayable
+        Console.WriteLine("Display version:");
+        // Print the render result here
+        Console.WriteLine(IDreport.Render());
+        // TODO: Print the print version by calling Render() on IPrintable
+        Console.WriteLine("Print version:");
+        // Print the render result here
+        Console.WriteLine(IPreport.Render());
     }
 }
