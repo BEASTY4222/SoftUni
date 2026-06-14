@@ -1,12 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Buffers;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq.Expressions;
-using System.Collections;
-using System.Text.RegularExpressions;
 using Inheritance;
+using Encapsulation;
 
 
 class Program
@@ -1715,24 +1709,25 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read input values
-        double circleRadius = Convert.ToDouble(Console.ReadLine());
-        double rectWidth = Convert.ToDouble(Console.ReadLine());
-        double rectHeight = Convert.ToDouble(Console.ReadLine());
-        
-        // TODO: Create a Circle object with the given radius
-        Circle circle = new Circle(circleRadius);
-        // TODO: Create a Rectangle object with the given width and height
-        Rectangle rec = new Rectangle(rectWidth, rectHeight);
-        // TODO: Create an array of IShape containing both shapes
-        IShape[] arr = {circle, rec};
-        // TODO: Loop through the array and for each shape:
-        // - Print the description using GetDescription()
-        // - Print "Area: " followed by CalculateArea() rounded to 2 decimal places
-        foreach (IShape ar in arr)
-        {
-            Console.WriteLine(ar.GetDescription());
-            Console.WriteLine($"Area: {ar.CalculateArea():F2}");
-        }
+        // Read inputs
+        decimal initialAmount = Convert.ToDecimal(Console.ReadLine());
+        string initialCurrency = Console.ReadLine();
+        decimal amountToAdd = Convert.ToDecimal(Console.ReadLine());
+        decimal conversionRate = Convert.ToDecimal(Console.ReadLine());
+
+        // TODO: Create an initial Money object with the initial amount and currency
+        Money money = new Money(initialAmount,initialCurrency);
+        // TODO: Print the original money using GetDisplay()
+        Console.WriteLine("Original: " + money.GetDisplay());
+        // TODO: Call Add() on the original and store the result in a new variable
+        Money money1 = money.Add(amountToAdd);
+        // TODO: Print the result after add using GetDisplay()
+        Console.WriteLine("After add: "+money1.GetDisplay());
+        // TODO: Print the original again to prove it's unchanged
+        Console.WriteLine("Original unchanged: " + money.GetDisplay());
+        // TODO: Convert the added result to EUR using the conversion rate
+        Money money2 = money1.Convert("EUR", conversionRate);
+        // TODO: Print the converted money using GetDisplay()
+        Console.WriteLine("Converted: " + money2.GetDisplay());
     }
 }
