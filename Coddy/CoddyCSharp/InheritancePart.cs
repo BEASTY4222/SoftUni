@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Inheritance
 {
     // TODO: Define the Vehicle base class
@@ -6,7 +8,7 @@ namespace Inheritance
     // - A Year property (int)
     // - A StartEngine() method that prints "{Brand} engine started."
     
-    public class Vehicle
+    public class Vehicle1
     {
         // TODO: Add properties here
         public string Brand{get; set;}
@@ -20,7 +22,7 @@ namespace Inheritance
     // - A NumberOfDoors property (int)
     // - A Honk() method that prints "{Brand} goes Beep Beep!"
     
-    public class Car : Vehicle
+    public class Car1 : Vehicle1
     {
         // TODO: Add NumberOfDoors property here
         public int NumberOfDoors{get; set;}
@@ -117,14 +119,14 @@ namespace Inheritance
         public virtual string Describe() => $"This is a {Name}";
     }
 
-    public class Circle : Shape
+    public class Circle1 : Shape
     {
         // TODO: Add a Radius property (double)
         public double Radius{get; set;}
         // TODO: Create a constructor that accepts a radius
         // Pass "Circle" to the base constructor
         // Set the Radius property
-        public Circle(double radius) : base("Circle") => Radius = radius;
+        public Circle1(double radius) : base("Circle") => Radius = radius;
         // TODO: Override the Describe() method
         // It should return "This is a Circle with radius {Radius}"
         public override string Describe() => $"This is a Circle with radius {Radius}"; 
@@ -261,5 +263,70 @@ namespace Inheritance
         {
             return $"[PRINT] {Title} | {Content}";
         }
+    }
+
+    public class Vehicle
+    {
+        // TODO: Add LicensePlate property
+        public string LicensePlate{get; set;}
+        // TODO: Create constructor
+        public Vehicle(string licensePlate) => LicensePlate = licensePlate;
+        // TODO: Implement GetBasicInfo() method
+        public string GetBasicInfo() => $"Vehicle: {LicensePlate}";
+    }
+
+    public class Car : Vehicle
+    {
+        // TODO: Add NumberOfDoors property
+        public int NumberOfDoors{get; set;}
+        // TODO: Create constructor (remember to call base constructor)
+        public Car(string licensePlate, int numberOfDoors) : base(licensePlate) => NumberOfDoors = numberOfDoors;
+        // TODO: Implement Honk() method
+        public string Honk() => $"{LicensePlate} honks: Beep beep!";
+    }
+
+    public class Motorcycle : Vehicle
+    {
+        // TODO: Add HasSidecar property
+        public bool HasSidecar{get; set;}   
+        // TODO: Create constructor (remember to call base constructor)
+        public Motorcycle(string licensePlate, bool hasSidecar) : base(licensePlate) => HasSidecar = hasSidecar;
+        // TODO: Implement Rev() method
+        public string Rev() => $"{LicensePlate} revs: Vroom!";
+    }
+
+    public interface IShape
+    {
+        // TODO: Declare the interface methods here
+        double CalculateArea();
+        string GetDescription();
+    }
+
+    public class Circle : IShape
+    {
+        // TODO: Add a Radius property (double)
+        public double Radius{get; set;}
+        // TODO: Create a constructor that takes radius as parameter
+        public Circle(double radius) => Radius = radius;
+        // TODO: Implement CalculateArea() using Math.PI * Radius * Radius
+        public double CalculateArea() => Math.PI * Radius * Radius;
+        // TODO: Implement GetDescription() returning "Circle with radius {Radius}"
+        public string GetDescription() => $"Circle with radius {Radius}";
+    }
+
+    public class Rectangle : IShape
+    {
+        // TODO: Add Width and Height properties (both double)
+        public double Width{get; set;}
+        public double Height{get; set;}
+        // TODO: Create a constructor that takes width and height as parameters
+        public Rectangle(double width, double height){
+            Width = width;
+            Height = height;
+        }
+        // TODO: Implement CalculateArea() returning width * height
+        public double CalculateArea() => Width * Height;
+        // TODO: Implement GetDescription() returning "Rectangle {Width}x{Height}"
+        public string GetDescription() => $"Rectangle {Width}x{Height}";
     }
 }

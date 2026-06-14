@@ -1715,23 +1715,24 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read input
-        string title = Console.ReadLine();
-        string content = Console.ReadLine();
-
-        // TODO: Create a Report object with the title and content
-        Report report = new Report(title, content);
-        // TODO: Store the report in an IDisplayable variable
-        // TODO: Store the same report in an IPrintable variable
-        IDisplayable IDreport = report;
-        IPrintable IPreport = report;
-        // TODO: Print the display version by calling Render() on IDisplayable
-        Console.WriteLine("Display version:");
-        // Print the render result here
-        Console.WriteLine(IDreport.Render());
-        // TODO: Print the print version by calling Render() on IPrintable
-        Console.WriteLine("Print version:");
-        // Print the render result here
-        Console.WriteLine(IPreport.Render());
+        // Read input values
+        double circleRadius = Convert.ToDouble(Console.ReadLine());
+        double rectWidth = Convert.ToDouble(Console.ReadLine());
+        double rectHeight = Convert.ToDouble(Console.ReadLine());
+        
+        // TODO: Create a Circle object with the given radius
+        Circle circle = new Circle(circleRadius);
+        // TODO: Create a Rectangle object with the given width and height
+        Rectangle rec = new Rectangle(rectWidth, rectHeight);
+        // TODO: Create an array of IShape containing both shapes
+        IShape[] arr = {circle, rec};
+        // TODO: Loop through the array and for each shape:
+        // - Print the description using GetDescription()
+        // - Print "Area: " followed by CalculateArea() rounded to 2 decimal places
+        foreach (IShape ar in arr)
+        {
+            Console.WriteLine(ar.GetDescription());
+            Console.WriteLine($"Area: {ar.CalculateArea():F2}");
+        }
     }
 }
