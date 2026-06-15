@@ -1,4 +1,6 @@
-﻿namespace AdvancedFeatures{
+﻿using System.Buffers;
+
+namespace AdvancedFeatures{
     public class Fraction
     {
         // TODO: Create read-only properties for Numerator and Denominator
@@ -106,5 +108,77 @@
         // "{Title}" by {Author} ({Year})
         // Note: The title should be wrapped in double quotes!
         public override string ToString() => $@"""{Title}"" | {Author} | {Year}";
+    }
+
+    public static class IntExtensions
+    {
+        // TODO: Implement IsEven() extension method
+        // Returns true if the number is even, false otherwise
+        // Remember: extension methods use 'this' keyword before the first parameter
+        public static bool IsEven(this int num)  => num % 2 == 0;
+
+
+        // TODO: Implement Square() extension method
+        // Returns the number multiplied by itself
+        public static int Square(this int num) => num * num;
+
+        // TODO: Implement IsInRange(int min, int max) extension method
+        // Returns true if the number is between min and max (inclusive)
+        public static bool IsInRange(this int num, int min, int max) => min <= num && num <= max;
+    }
+
+    public class CustomList
+    {
+        // TODO: Declare a private integer array to store items
+        private int[] arr;
+        private int _index = 0;
+        // TODO: Create a Count property with a public getter and private setter
+        public int Count{get{return _index;} private set;}
+        // TODO: Create a constructor that accepts capacity and initializes the array
+        public CustomList(int capacity) => arr = new int[capacity];
+        // TODO: Create an Add(int item) method that adds an item to the next available position
+        public void Add(int item)
+        {
+            arr[_index] = item;
+            _index++;
+        }
+        // TODO: Create an indexer this[int index] for getting and setting items by position
+        public int this[int index]
+        {
+            get{ return arr[index];}
+            set{arr[index] = value;}
+        }
+
+        // TODO: Overload the + operator to combine two CustomLists into a new one
+        public static CustomList operator +(CustomList a, CustomList b)
+        {
+            int newSize = a.Count + b.Count;
+            CustomList result = new CustomList(newSize);
+
+            for(int i = 0;i < a.Count; i++) result.Add(a[i]);
+            
+            for(int i = 0;i < b.Count; i++) result.Add(b[i]);
+
+            return result;
+
+        }
+        // TODO: Override ToString() to return items in format [item1, item2, item3]
+        public override string ToString()
+        {
+            return "["+String.Join(", ", arr)+"]";
+        }
+    }
+
+    public static class ListExtensions
+    {
+        // TODO: Create an extension method Sum() for CustomList
+        // that returns the sum of all items in the list (up to Count)
+        public static int Sum(this CustomList a)
+        {
+            int sum = 0;
+            for (int i = 0;i < a.Count;i++) sum += a[i];
+            
+            return sum;
+        }
     }
 }

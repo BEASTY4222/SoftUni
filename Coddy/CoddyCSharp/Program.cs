@@ -1710,14 +1710,36 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read input
-        string title = Console.ReadLine();
-        string author = Console.ReadLine();
-        int year = Convert.ToInt32(Console.ReadLine());
+        // Read six integers
+        int a1 = Convert.ToInt32(Console.ReadLine());
+        int a2 = Convert.ToInt32(Console.ReadLine());
+        int a3 = Convert.ToInt32(Console.ReadLine());
+        int b1 = Convert.ToInt32(Console.ReadLine());
+        int b2 = Convert.ToInt32(Console.ReadLine());
+        int b3 = Convert.ToInt32(Console.ReadLine());
 
-        // TODO: Create a Book object using the input values
-        Book book = new Book(title, author, year);
-        // TODO: Print the book object directly using Console.WriteLine()
-        Console.WriteLine(book);
+        // TODO: Create first CustomList with capacity 5
+        // TODO: Add a1, a2, a3 to the first list
+        CustomList arr1 = new CustomList(3);
+        arr1.Add(a1);
+        arr1.Add(a2);
+        arr1.Add(a3);
+        // TODO: Create second CustomList with capacity 3
+        // TODO: Add b1, b2, b3 to the second list
+        CustomList arr2 = new CustomList(3);
+        arr2.Add(b1);
+        arr2.Add(b2);
+        arr2.Add(b3);
+        // TODO: Print List 1 using ToString()
+        // TODO: Print List 2 using ToString()
+        // TODO: Print List 1[0] using the indexer
+        // TODO: Combine lists using + operator and print the result
+        // TODO: Print the sum of the combined list using the Sum() extension method
+        CustomList arr3 = arr1 + arr2;
+        Console.WriteLine("List 1: " + arr1.ToString());
+        Console.WriteLine("List 2: " + arr2.ToString());
+        Console.WriteLine("List 1[0]: " + arr1[0]);
+        Console.WriteLine($"Combined: {arr3.ToString()}");
+        Console.WriteLine("Combined sum: " + arr3.Sum());
     }
 }
