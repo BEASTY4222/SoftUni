@@ -1710,25 +1710,14 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read inputs
-        string name = Console.ReadLine();
-        string studentId = Console.ReadLine();
-        int grade1 = Convert.ToInt32(Console.ReadLine());
-        int grade2 = Convert.ToInt32(Console.ReadLine());
-        int grade3 = Convert.ToInt32(Console.ReadLine());
+        // Read input
+        string title = Console.ReadLine();
+        string author = Console.ReadLine();
+        int year = Convert.ToInt32(Console.ReadLine());
 
-        // TODO: Create a Student object with the name and studentId
-        Student student = new Student(name, studentId);
-        // TODO: Add all three grades using AddGrade method
-        student.AddGrade(grade1);
-        student.AddGrade(grade2);
-        student.AddGrade(grade3);
-        // TODO: Print the output in the required format:
-        // {GetStudentInfo() result}
-        // Grades recorded: {GetGradeCount()}
-        // Average: {Average}
-        Console.WriteLine(student.GetStudentInfo());
-        Console.WriteLine($"Grades recorded: {student.GetGradeCount()}");
-        Console.WriteLine($"Average: {student.Average:0.#}");
+        // TODO: Create a Book object using the input values
+        Book book = new Book(title, author, year);
+        // TODO: Print the book object directly using Console.WriteLine()
+        Console.WriteLine(book);
     }
 }
