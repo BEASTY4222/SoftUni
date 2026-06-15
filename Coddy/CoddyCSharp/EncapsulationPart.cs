@@ -170,4 +170,47 @@ namespace Encapsulation
         // Hint: Use Amount.ToString("0.00") for proper decimal formatting
         public string GetDisplay() => $"{Amount:F2} {Currency}";
     }
+    
+    public class Student
+    {
+        // TODO: Declare a public readonly field 'Name' (string)
+        public readonly string Name;
+        // TODO: Declare a private readonly field for student ID (string)
+        private readonly string ID;
+        // TODO: Declare a private list to store grades (integers)
+        private List<int> grades;
+        // TODO: Create a constructor that accepts name and studentId
+        public Student(string name, string id)
+        {
+            Name = name;
+            ID = id;
+            grades = new List<int>();
+        }
+        // TODO: Create a public read-only property 'Average' that:
+        // - Returns the average of all grades
+        // - Returns 0 if no grades exist
+        public double Average
+        {
+            get
+            {
+                double sum = 0;
+                if(grades.Count == 0) return 0;
+                foreach(double grade in grades) sum += grade;
+                return sum / grades.Count;
+            }
+        }
+        // TODO: Create a public method AddGrade(int grade) that:
+        // - Only accepts grades between 0 and 100 (inclusive)
+        // - Silently ignores invalid grades
+        public void AddGrade(int grade)
+        {
+            if(grade >= 0 && grade <= 100) grades.Add(grade);
+        }
+        // TODO: Create a public method GetGradeCount() that:
+        // - Returns how many valid grades have been recorded
+        public int GetGradeCount() => grades.Count;
+        // TODO: Create a public method GetStudentInfo() that:
+        // - Returns a string in format "{Name} (ID: {last 4 characters of student ID})"
+        public string GetStudentInfo() => $"{Name} (ID: {ID.Substring(ID.Length - 4)})";
+    }
 }

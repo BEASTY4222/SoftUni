@@ -1,6 +1,7 @@
 ﻿using System;
 using Inheritance;
 using Encapsulation;
+using AdvancedFeatures;
 
 
 class Program
@@ -1710,24 +1711,24 @@ class Program
     public static void Main(String[] args)
     {
         // Read inputs
-        decimal initialAmount = Convert.ToDecimal(Console.ReadLine());
-        string initialCurrency = Console.ReadLine();
-        decimal amountToAdd = Convert.ToDecimal(Console.ReadLine());
-        decimal conversionRate = Convert.ToDecimal(Console.ReadLine());
+        string name = Console.ReadLine();
+        string studentId = Console.ReadLine();
+        int grade1 = Convert.ToInt32(Console.ReadLine());
+        int grade2 = Convert.ToInt32(Console.ReadLine());
+        int grade3 = Convert.ToInt32(Console.ReadLine());
 
-        // TODO: Create an initial Money object with the initial amount and currency
-        Money money = new Money(initialAmount,initialCurrency);
-        // TODO: Print the original money using GetDisplay()
-        Console.WriteLine("Original: " + money.GetDisplay());
-        // TODO: Call Add() on the original and store the result in a new variable
-        Money money1 = money.Add(amountToAdd);
-        // TODO: Print the result after add using GetDisplay()
-        Console.WriteLine("After add: "+money1.GetDisplay());
-        // TODO: Print the original again to prove it's unchanged
-        Console.WriteLine("Original unchanged: " + money.GetDisplay());
-        // TODO: Convert the added result to EUR using the conversion rate
-        Money money2 = money1.Convert("EUR", conversionRate);
-        // TODO: Print the converted money using GetDisplay()
-        Console.WriteLine("Converted: " + money2.GetDisplay());
+        // TODO: Create a Student object with the name and studentId
+        Student student = new Student(name, studentId);
+        // TODO: Add all three grades using AddGrade method
+        student.AddGrade(grade1);
+        student.AddGrade(grade2);
+        student.AddGrade(grade3);
+        // TODO: Print the output in the required format:
+        // {GetStudentInfo() result}
+        // Grades recorded: {GetGradeCount()}
+        // Average: {Average}
+        Console.WriteLine(student.GetStudentInfo());
+        Console.WriteLine($"Grades recorded: {student.GetGradeCount()}");
+        Console.WriteLine($"Average: {student.Average:0.#}");
     }
 }
