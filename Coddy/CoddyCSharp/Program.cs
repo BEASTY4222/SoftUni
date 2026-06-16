@@ -2,6 +2,7 @@
 using Inheritance;
 using Encapsulation;
 using AdvancedFeatures;
+using System.Security.Cryptography.X509Certificates;
 
 
 class Program
@@ -1710,36 +1711,20 @@ class Program
     
     public static void Main(String[] args)
     {
-        // Read six integers
-        int a1 = Convert.ToInt32(Console.ReadLine());
-        int a2 = Convert.ToInt32(Console.ReadLine());
-        int a3 = Convert.ToInt32(Console.ReadLine());
-        int b1 = Convert.ToInt32(Console.ReadLine());
-        int b2 = Convert.ToInt32(Console.ReadLine());
-        int b3 = Convert.ToInt32(Console.ReadLine());
+        // Read input
+        int temp1 = Convert.ToInt32(Console.ReadLine());
+        int temp2 = Convert.ToInt32(Console.ReadLine());
 
-        // TODO: Create first CustomList with capacity 5
-        // TODO: Add a1, a2, a3 to the first list
-        CustomList arr1 = new CustomList(3);
-        arr1.Add(a1);
-        arr1.Add(a2);
-        arr1.Add(a3);
-        // TODO: Create second CustomList with capacity 3
-        // TODO: Add b1, b2, b3 to the second list
-        CustomList arr2 = new CustomList(3);
-        arr2.Add(b1);
-        arr2.Add(b2);
-        arr2.Add(b3);
-        // TODO: Print List 1 using ToString()
-        // TODO: Print List 2 using ToString()
-        // TODO: Print List 1[0] using the indexer
-        // TODO: Combine lists using + operator and print the result
-        // TODO: Print the sum of the combined list using the Sum() extension method
-        CustomList arr3 = arr1 + arr2;
-        Console.WriteLine("List 1: " + arr1.ToString());
-        Console.WriteLine("List 2: " + arr2.ToString());
-        Console.WriteLine("List 1[0]: " + arr1[0]);
-        Console.WriteLine($"Combined: {arr3.ToString()}");
-        Console.WriteLine("Combined sum: " + arr3.Sum());
+        // TODO: Create a TemperatureMonitor instance
+        TemperatureMonitor temperatureMonitor = new TemperatureMonitor();
+        // TODO: Subscribe a handler that prints: "Alert: Temperature is now {value} degrees"
+        //btn.Clicked += () => Console.WriteLine("Button was clicked!");
+        temperatureMonitor.TemperatureChanged += () => Console.WriteLine($"Alert: Temperature is now {temperatureMonitor.Temperature} degrees");
+        // TODO: Subscribe another handler that prints: "Logged: {value}"
+        temperatureMonitor.TemperatureChanged += () => Console.WriteLine($"Logged: {temperatureMonitor.Temperature}");
+        // TODO: Set the temperature to temp1
+        temperatureMonitor.Temperature = temp1;
+        // TODO: Set the temperature to temp2
+        temperatureMonitor.Temperature = temp2;
     }
 }

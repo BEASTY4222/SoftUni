@@ -181,4 +181,83 @@ namespace AdvancedFeatures{
             return sum;
         }
     }
+
+    // TODO: Create FormattingBehavior class
+    // It should have a Format(string message) method
+    // that returns the message wrapped with "[ALERT] " at the start and " [END]" at the end
+    public class FormattingBehavior
+    {
+        // TODO: Implement Format method
+        public string Format(string message) => "[ALERT] " + message + " [END]"; 
+    }
+
+    // TODO: Create DeliveryBehavior class
+    // It should have a Deliver(string channel, string message) method
+    // that returns "Sending via {channel}: {message}"
+    public class DeliveryBehavior
+    {
+        // TODO: Implement Deliver method
+        public string Deliver(string channel, string message) => $"Sending via {channel}: {message}";
+    }
+
+    public class NotificationSender
+    {
+        // TODO: Add private fields for FormattingBehavior and DeliveryBehavior
+        private FormattingBehavior formattingBehavior;
+        private DeliveryBehavior deliveryBehavior;   
+        // TODO: Add Channel property (string)
+        public string Channel{get;set;}
+        // TODO: Create constructor that accepts channel name
+        // Initialize the behavior objects and set the Channel property
+        public NotificationSender(string channel)
+        {
+            Channel = channel;
+            formattingBehavior = new FormattingBehavior();
+            deliveryBehavior = new DeliveryBehavior();
+        }
+        // TODO: Implement Send(string message) method
+        // 1. First format the message using FormattingBehavior
+        // 2. Then deliver it using DeliveryBehavior with the Channel
+        // 3. Return the final result
+        public string Send(string message) => deliveryBehavior.Deliver(Channel,formattingBehavior.Format(message));
+    }
+      // TODO: Create a generic Storage<T> class
+    public class Storage<T>
+    {
+        // TODO: Declare a private array of type T to hold items
+        private T[] arr;
+        // TODO: Create a Count property to track how many items are stored
+        public int Count{get;set;}
+        // TODO: Create a constructor that accepts a capacity parameter
+        // and initializes the internal array
+        public Storage(int size) => arr = new T[size];
+        // TODO: Implement Add(T item) method
+        // Add an item if there's room in the storage
+        public void Add(T item) => arr[Count++] = item;
+        // TODO: Implement Get(int index) method
+        // Return the item at the specified index
+        public T Get(int index) => arr[index];
+        // TODO: Implement GetAll() method
+        // Return all stored items joined by ", "
+        public string GetAll() => String.Join(", ", arr);
+    }
+
+    public class TemperatureMonitor
+    {
+        // TODO: Declare a private field to store the current temperature
+        private int _temperature;
+        // TODO: Declare an event using Action<int> called TemperatureChanged
+        public event Action TemperatureChanged;
+        // TODO: Create a Temperature property (int) where:
+        //       - The getter returns the private field
+        //       - The setter updates the private field and raises the event
+        //       - Use ?.Invoke() pattern to safely raise the event
+        public int Temperature{
+            get => _temperature; 
+            set{
+                _temperature = value;
+                TemperatureChanged?.Invoke();
+            }
+        }
+    }
 }
