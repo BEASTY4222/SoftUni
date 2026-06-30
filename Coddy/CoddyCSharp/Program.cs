@@ -1708,23 +1708,90 @@ class Program
         
     }
 
-    
+    public static int GetPosForPiece(char letter)
+    {
+        switch (letter)
+        {
+            case 'a': return 1;
+            case 'b': return 2;
+            case 'c': return 3;
+            case 'd': return 4;
+            case 'e': return 5;
+            case 'f': return 6;
+            case 'g': return 7;
+            case 'h': return 8;
+        }
+        return 0;
+    }
+
+    public void Chess()
+    {
+        string? knightPos = Console.ReadLine();
+        int knightRow = (knightPos.Last()-'0')-1;
+        int kngihtCol = GetPosForPiece(knightPos.First())-1;
+
+        var knightLoc = (knightRow,kngihtCol);
+        
+        //Time O(n)
+        int n = Convert.ToInt16(Console.ReadLine());
+        int endagredPieces = 0;
+        for(int i = 0; i < n; i++)
+        {
+            string? piecePos = Console.ReadLine();
+            int pieceRow = (piecePos.Last() - '0') - 1;
+            int pieceCol = GetPosForPiece(piecePos.First()) - 1;
+            (int pieceRow, int pieceCol) pieceLoc = (pieceRow, pieceCol);
+
+            
+            if(knightLoc.knightRow + 2 == pieceLoc.pieceRow && knightLoc.kngihtCol + 1 == pieceLoc.pieceCol)
+                endagredPieces++;
+            else if(knightLoc.knightRow + 2 == pieceLoc.pieceRow && knightLoc.kngihtCol - 1 == pieceLoc.pieceCol)
+                endagredPieces++;
+            
+            if(knightLoc.knightRow + 1 == pieceLoc.pieceRow && knightLoc.kngihtCol + 2 == pieceLoc.pieceCol)
+                endagredPieces++;
+            else if(knightLoc.knightRow - 1 == pieceLoc.pieceRow && knightLoc.kngihtCol + 2 == pieceLoc.pieceCol)
+                endagredPieces++;
+
+            if(knightLoc.knightRow - 2 == pieceLoc.pieceRow && knightLoc.kngihtCol + 1 == pieceLoc.pieceCol)
+                endagredPieces++;
+            else if(knightLoc.knightRow - 2 == pieceLoc.pieceRow && knightLoc.kngihtCol - 1 == pieceLoc.pieceCol)
+                endagredPieces++;
+
+            if(knightLoc.knightRow + 1 == pieceLoc.pieceRow && knightLoc.kngihtCol - 2 == pieceLoc.pieceCol)
+                endagredPieces++;
+            else if(knightLoc.knightRow - 1 == pieceLoc.pieceRow && knightLoc.kngihtCol - 2 == pieceLoc.pieceCol)
+                endagredPieces++;
+        }
+
+        Console.WriteLine(endagredPieces);
+    }
+
     public static void Main(String[] args)
     {
-        // Read input
-        int temp1 = Convert.ToInt32(Console.ReadLine());
-        int temp2 = Convert.ToInt32(Console.ReadLine());
+        int n = int.Parse(Console.ReadLine());
+        int copyN = n;
+        int largestDivisor = n;
 
-        // TODO: Create a TemperatureMonitor instance
-        TemperatureMonitor temperatureMonitor = new TemperatureMonitor();
-        // TODO: Subscribe a handler that prints: "Alert: Temperature is now {value} degrees"
-        //btn.Clicked += () => Console.WriteLine("Button was clicked!");
-        temperatureMonitor.TemperatureChanged += () => Console.WriteLine($"Alert: Temperature is now {temperatureMonitor.Temperature} degrees");
-        // TODO: Subscribe another handler that prints: "Logged: {value}"
-        temperatureMonitor.TemperatureChanged += () => Console.WriteLine($"Logged: {temperatureMonitor.Temperature}");
-        // TODO: Set the temperature to temp1
-        temperatureMonitor.Temperature = temp1;
-        // TODO: Set the temperature to temp2
-        temperatureMonitor.Temperature = temp2;
+        short num = 1;
+        short pos = 0;
+
+        while (true)
+        {
+
+            string stringN = Convert.ToString(n);
+            char[] charsN = stringN.ToArray();
+            charsN[pos] = Convert.ToChar(n);
+            stringN = new string(charsN);
+
+            if(copyN > largestDivisor && Convert.ToInt32(stringN) % 3 == 0) largestDivisor = copyN;
+
+            if(num == 9) num = 1;
+            num++;
+            if(pos == stringN.Length) break;
+            pos++;
+        }
+
+        Console.WriteLine(largestDivisor);
     }
 }
