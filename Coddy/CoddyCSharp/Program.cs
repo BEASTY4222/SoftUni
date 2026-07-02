@@ -1767,31 +1767,146 @@ class Program
         Console.WriteLine(endagredPieces);
     }
 
-    public static void Main(String[] args)
+    public static int LargestDivisor(int n)
     {
-        int n = int.Parse(Console.ReadLine());
         int copyN = n;
-        int largestDivisor = n;
+        int largestDivisor = 0;
 
-        short num = 1;
+        char num = '1';
         short pos = 0;
+        string stringN = Convert.ToString(n);
+        short NLenght = (short)stringN.Length;
 
         while (true)
         {
 
-            string stringN = Convert.ToString(n);
+            
             char[] charsN = stringN.ToArray();
-            charsN[pos] = Convert.ToChar(n);
+            
+            charsN[pos] = num;
             stringN = new string(charsN);
 
-            if(copyN > largestDivisor && Convert.ToInt32(stringN) % 3 == 0) largestDivisor = copyN;
+            if(Convert.ToInt32(stringN) > largestDivisor && Convert.ToInt32(stringN) % 3 == 0 && n != Convert.ToInt32(stringN)) largestDivisor = Convert.ToInt32(stringN);
+            Console.WriteLine(stringN);
 
-            if(num == 9) num = 1;
+            if(num == '9')
+            {
+                stringN = Convert.ToString(n);
+                num = '1';
+                pos++;
+            }
             num++;
-            if(pos == stringN.Length) break;
-            pos++;
+
+            if(pos == NLenght) break; 
         }
 
-        Console.WriteLine(largestDivisor);
+        return largestDivisor;
+    }
+
+    public static void Spreading()
+    {
+        string input = Console.ReadLine();
+        int height = Convert.ToInt32(input.Substring(0,input.IndexOf(' ')));
+        int width = Convert.ToInt32(input.Substring(input.IndexOf(' ')));
+
+        int[,] grid = new int[height,width];
+
+        int housesThatNeedGray = int.Parse(Console.ReadLine());
+        int n = int.Parse(Console.ReadLine());
+        short paintedInGray = (short)n;
+        short months = 0;
+
+        for(int i = 0;i < n; ++i)
+        {
+            string startingHouses = Console.ReadLine();
+            int x = Convert.ToInt32(startingHouses.Substring(0,startingHouses.IndexOf(' ')))-1;
+            int y = Convert.ToInt32(startingHouses.Substring(startingHouses.IndexOf(' ')))-1;
+            grid[x,y] = 1;
+        }
+
+        while (paintedInGray < housesThatNeedGray) {
+            // Create a snapshot of the grid at the start of this month
+            // so we don't accidentally look at newly painted houses
+            int[,] currentGrid = (int[,])grid.Clone();
+            bool changedThisMonth = false;
+
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    // Check the snapshot grid, but update the main grid
+                    if (currentGrid[i, j] == 1) {
+                        // Down
+                        if (i + 1 < height && grid[i + 1, j] != 1) {
+                            grid[i + 1, j] = 1;
+                            paintedInGray++;
+                            changedThisMonth = true;
+                        }
+                        // Up (Fixed the broken condition)
+                        if (i - 1 >= 0 && grid[i - 1, j] != 1) {
+                            grid[i - 1, j] = 1;
+                            paintedInGray++;
+                            changedThisMonth = true;
+                        }
+                        // Right
+                        if (j + 1 < width && grid[i, j + 1] != 1) {
+                            grid[i, j + 1] = 1;
+                            paintedInGray++;
+                            changedThisMonth = true;
+                        }
+                        // Left
+                        if (j - 1 >= 0 && grid[i, j - 1] != 1) {
+                            grid[i, j - 1] = 1;
+                            paintedInGray++;
+                            changedThisMonth = true;
+                        }
+                    }
+                }
+            }
+
+            // Anti-timeout guard: if no new houses could be painted but we haven't 
+            // reached the goal, break out to avoid an infinite loop.
+            if (!changedThisMonth && paintedInGray < housesThatNeedGray) {
+                break; 
+            }
+
+            months++;
+        }
+        Console.WriteLine(months);
+    }
+
+    public static void Main(String[] args)
+    {
+        string input = Console.ReadLine();
+        string[] tokens = input.Split(' ');
+        
+        int min = int.Parse(tokens[0]);
+        int minCopy = min;
+        int max = int.Parse(tokens[1]);
+
+        int smallestN = 1;
+        int mostDivisors = 1;
+
+        int i = 1;
+        int currSmallestN = minCopy;
+        int currDivisors = 0;
+        while(true)
+        {
+            if(minCopy % i == 0) currDivisors++;
+
+            if(currSmallestN < smallestN && currDivisors > mostDivisors)
+            {
+                smallestN = currSmallestN;
+                mostDivisors = currDivisors;
+            }
+
+            if(i == max)
+            {
+                minCopy++;
+                i = 1;
+            }
+            i++;
+            if(minCopy == max) break;
+        }
+        
+        Console.WriteLine(smallestN+" "+mostDivisors);
     }
 }
