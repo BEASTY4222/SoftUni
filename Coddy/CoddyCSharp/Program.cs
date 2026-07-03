@@ -1879,32 +1879,34 @@ class Program
         string[] tokens = input.Split(' ');
         
         int min = int.Parse(tokens[0]);
-        int minCopy = min;
         int max = int.Parse(tokens[1]);
 
-        int smallestN = 1;
-        int mostDivisors = 1;
+        int smallestN = max;
+        int mostDivisors = 0;
 
         int i = 1;
-        int currSmallestN = minCopy;
+        int currSmallestN = max;
         int currDivisors = 0;
-        while(true)
+        while(currSmallestN != min)
         {
-            if(minCopy % i == 0) currDivisors++;
 
-            if(currSmallestN < smallestN && currDivisors > mostDivisors)
+            if(i >= Math.Sqrt(currSmallestN))
             {
-                smallestN = currSmallestN;
-                mostDivisors = currDivisors;
-            }
+                if(currSmallestN < smallestN && currDivisors >= mostDivisors)
+                {
+                    smallestN = currSmallestN;
+                    mostDivisors = currDivisors;
+                }
 
-            if(i == max)
-            {
-                minCopy++;
+                currSmallestN--;
                 i = 1;
+                currDivisors = 0;
             }
+
+            if(currSmallestN % i == 0) currDivisors += 2;
+
+
             i++;
-            if(minCopy == max) break;
         }
         
         Console.WriteLine(smallestN+" "+mostDivisors);
