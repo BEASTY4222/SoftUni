@@ -3,7 +3,7 @@ using Inheritance;
 using Encapsulation;
 using AdvancedFeatures;
 using System.Security.Cryptography.X509Certificates;
-
+using patterns;
 
 class Program
 {
@@ -1923,23 +1923,34 @@ class Program
 
     public static void Main(String[] args)
     {
-        // Read inputs
-        int firstInt = Convert.ToInt32(Console.ReadLine());
-        int secondInt = Convert.ToInt32(Console.ReadLine());
-        int thirdInt = Convert.ToInt32(Console.ReadLine());
-        double decimalNum = Convert.ToDouble(Console.ReadLine());
-
-        // TODO: Create a Calculator instance
-        Calculator calc = new Calculator();
-        // TODO: Call Multiply with two integers and print the result
-        Console.WriteLine(calc.Multiply(firstInt, secondInt));
-        // TODO: Call Multiply with three integers and print the result
-        Console.WriteLine(calc.Multiply(firstInt, secondInt, thirdInt));
-        // TODO: Call Multiply with the first integer and decimal number, print the result
-        Console.WriteLine(calc.Multiply(firstInt, decimalNum));
-        // TODO: Call Describe with the first integer and print the result
-        Console.WriteLine(calc.Describe(firstInt));
-        // TODO: Call Describe with the decimal number and print the result
-        Console.WriteLine(calc.Describe(decimalNum));
+        // Read the number of patterns
+        int n = Convert.ToInt32(Console.ReadLine());
+        
+        // Create a new PatternCatalog
+        PatternCatalog catalog = new PatternCatalog();
+        
+        // TODO: Read each pattern's details (name, category, description)
+        // and add them to the catalog
+        for (int i = 0; i < n; i++)
+        {
+            string name = Console.ReadLine();
+            string category = Console.ReadLine();
+            string description = Console.ReadLine();
+            
+            // TODO: Create a Pattern and add it to the catalog
+            catalog.AddPattern(new Pattern(name, category, description));
+        }
+        
+        // Read the category to filter by
+        string filterCategory = Console.ReadLine();
+        
+        // TODO: Get patterns by the filter category
+        // and print their summaries
+        // If no patterns match, print "No patterns found"
+        List<Pattern> pars = catalog.GetPatternsByCategory(filterCategory);
+        if(pars.Count == 0) Console.WriteLine("No patterns found");
+        else 
+            foreach(Pattern par in pars) Console.WriteLine($"[{par.Category}] {par.Name}: {par.Description}");
+            
     }
 }
