@@ -1370,7 +1370,7 @@ class Program
     }
     
     
-    public class Calculator
+    public class CalculatorB
     {
         // TODO: Create a private field 'memory' to store a decimal value
         private decimal memory;
@@ -1384,14 +1384,14 @@ class Program
         // TODO: Create a read-only property 'OperationCount' that returns the operationCount field
         public int OperationCount => operationCount;
         // TODO: Create a constructor with parameter 'name' that initializes Name and sets memory and operationCount to 0
-        public Calculator(string name)
+        public CalculatorB(string name)
         {
             this.Name = name;
             this.memory = 0;
             this.operationCount = 0;
         }
         // TODO: Create a default constructor that uses 'this' to call the other constructor with "Default" as name
-        public Calculator() : this("Default")
+        public CalculatorB() : this("Default")
         { 
             
         }
@@ -1872,43 +1872,74 @@ class Program
         }
         Console.WriteLine(months);
     }
+    public class NotificationService
+    {
+        // TODO: Create the SendNotification method with optional parameters
+        // Method signature: SendNotification(string message, string priority = "Normal", bool addTimestamp = true)
+        // 
+        // The method should:
+        // - Return a formatted notification string
+        // - When addTimestamp is true, prefix with [TIMESTAMP]
+        // - Format: [Priority] Message or [TIMESTAMP] [Priority] Message
+
+        public string SendNotification(string message, string priority = "Normal", bool addTimestamp = true) 
+        => addTimestamp ? $"[TIMESTAMP] [{priority}] {message}" : $"[{priority}] {message}";
+        
+
+    }
+
+    public class ReportGenerator
+    {
+        // TODO: Create the GenerateReport method with the following signature:
+        // GenerateReport(string title, string author = "Anonymous", bool includeHeader = true, bool includeSummary = false, int maxPages = 10)
+        // TODO: Return a formatted string in this format:
+        // Report: {title} by {author} | Header: {Yes/No}, Summary: {Yes/No}, Max Pages: {maxPages}
+        public string GenerateReport(string title, string author = "Anonymous", bool includeHeader = true, bool includeSummary = false, int maxPages = 10)
+        {
+            string Summary = includeSummary ? "Yes": "No";
+            string Header = includeHeader ?  "Yes": "No";
+            return $"{title} by {author} | Header: {Header}, Summary: {Summary}, Max Pages: {maxPages}";
+        }
+    }
+
+    public class Calculator
+    {
+        // TODO: Create Multiply method that takes two int parameters
+        // Returns the product as an int
+        public int Multiply(int a, int b) => a * b; 
+        // TODO: Create Multiply method that takes three int parameters
+        // Returns the product as an int
+        public int Multiply(int a, int b, int c) => a * b * c;
+        // TODO: Create Multiply method that takes two double parameters
+        // Returns the product as a double
+        public double Multiply(double a, double b) => a * b;
+        // TODO: Create Describe method that takes an int parameter
+        // Returns "Integer: {value}"
+        public string Describe(int value) => $"Integer: {value}";
+        // TODO: Create Describe method that takes a double parameter
+        // Returns "Double: {value}"
+        public string Describe(double value) => $"Integer: {value}";
+    }
 
     public static void Main(String[] args)
     {
-        string input = Console.ReadLine();
-        string[] tokens = input.Split(' ');
-        
-        int min = int.Parse(tokens[0]);
-        int max = int.Parse(tokens[1]);
+        // Read inputs
+        int firstInt = Convert.ToInt32(Console.ReadLine());
+        int secondInt = Convert.ToInt32(Console.ReadLine());
+        int thirdInt = Convert.ToInt32(Console.ReadLine());
+        double decimalNum = Convert.ToDouble(Console.ReadLine());
 
-        int smallestN = max;
-        int mostDivisors = 0;
-
-        int i = 1;
-        int currSmallestN = max;
-        int currDivisors = 0;
-        while(currSmallestN != min)
-        {
-
-            if(i >= Math.Sqrt(currSmallestN))
-            {
-                if(currSmallestN < smallestN && currDivisors >= mostDivisors)
-                {
-                    smallestN = currSmallestN;
-                    mostDivisors = currDivisors;
-                }
-
-                currSmallestN--;
-                i = 1;
-                currDivisors = 0;
-            }
-
-            if(currSmallestN % i == 0) currDivisors += 2;
-
-
-            i++;
-        }
-        
-        Console.WriteLine(smallestN+" "+mostDivisors);
+        // TODO: Create a Calculator instance
+        Calculator calc = new Calculator();
+        // TODO: Call Multiply with two integers and print the result
+        Console.WriteLine(calc.Multiply(firstInt, secondInt));
+        // TODO: Call Multiply with three integers and print the result
+        Console.WriteLine(calc.Multiply(firstInt, secondInt, thirdInt));
+        // TODO: Call Multiply with the first integer and decimal number, print the result
+        Console.WriteLine(calc.Multiply(firstInt, decimalNum));
+        // TODO: Call Describe with the first integer and print the result
+        Console.WriteLine(calc.Describe(firstInt));
+        // TODO: Call Describe with the decimal number and print the result
+        Console.WriteLine(calc.Describe(decimalNum));
     }
 }
