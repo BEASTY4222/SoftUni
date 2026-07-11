@@ -1923,34 +1923,15 @@ class Program
 
     public static void Main(String[] args)
     {
-        // Read the number of patterns
-        int n = Convert.ToInt32(Console.ReadLine());
-        
-        // Create a new PatternCatalog
-        PatternCatalog catalog = new PatternCatalog();
-        
-        // TODO: Read each pattern's details (name, category, description)
-        // and add them to the catalog
-        for (int i = 0; i < n; i++)
-        {
-            string name = Console.ReadLine();
-            string category = Console.ReadLine();
-            string description = Console.ReadLine();
-            
-            // TODO: Create a Pattern and add it to the catalog
-            catalog.AddPattern(new Pattern(name, category, description));
-        }
-        
-        // Read the category to filter by
-        string filterCategory = Console.ReadLine();
-        
-        // TODO: Get patterns by the filter category
-        // and print their summaries
-        // If no patterns match, print "No patterns found"
-        List<Pattern> pars = catalog.GetPatternsByCategory(filterCategory);
-        if(pars.Count == 0) Console.WriteLine("No patterns found");
-        else 
-            foreach(Pattern par in pars) Console.WriteLine($"[{par.Category}] {par.Name}: {par.Description}");
-            
+        // Read input
+        string type = Console.ReadLine();
+        string message = Console.ReadLine();
+
+        // TODO: Create a NotificationFactory instance
+        var factory = new NotificationFactory();
+        // TODO: Use the factory to create the appropriate notification
+        var notification = factory.Create(type);
+        // TODO: Call the Send method and print the result
+        Console.WriteLine(notification.Send(message));    
     }
 }

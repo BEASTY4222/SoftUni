@@ -64,4 +64,65 @@ namespace patterns
             return $"[{Category}] {Name}: {Description}";
         }
     }
+
+    
+    public class ConfigManager
+    {
+        // TODO: Create a private static field to hold the single instance
+        // Use static initialization for thread safety
+        private static readonly ConfigManager _configManager = new ConfigManager();       
+        // TODO: Create a private string field _appName initialized to "MyApp"
+        private static string _appName = "MyApp";
+        // TODO: Create a private constructor to prevent external instantiation
+        private ConfigManager(){ }
+        // TODO: Create a public static Instance property that returns the single instance
+        public static ConfigManager Instance{get => _configManager;} 
+        // TODO: Implement SetAppName(string name) method to update the app name
+        // TODO: Implement GetAppName() method that returns the current app name
+        public static string AppName{get => _appName; set => _appName = value;}
+    }
+
+    // TODO: Define the INotification interface with a Send(string message) method that returns a string
+    public interface INotification
+    {
+        string Send(string message);
+    }
+    // TODO: Create EmailNotification class that implements INotification
+    // The Send method should return "Email: {message}"
+    public class EmailNotification : INotification
+    {
+        public string Send(string message) => $"Email: {message}";
+    }
+    // TODO: Create SmsNotification class that implements INotification
+    // The Send method should return "SMS: {message}"
+    public class SmsNotification : INotification
+    {
+        public string Send(string message) => $"SMS: {message}";
+    }
+    // TODO: Create PushNotification class that implements INotification
+    // The Send method should return "Push: {message}"
+    public class PushNotification : INotification
+    {
+        public string Send(string message) => $"Push: {message}";
+    }
+
+    public class NotificationFactory
+    {
+        // TODO: Implement the Create(string type) method
+        // It should return the appropriate INotification based on the type:
+        // - "email" returns EmailNotification
+        // - "sms" returns SmsNotification
+        // - "push" returns PushNotification
+        // - For any unrecognized type, return EmailNotification as default
+        public INotification Create(string type)
+        {
+            return type switch
+            {
+                "email" => new EmailNotification(),
+                "sms" => new SmsNotification(),
+                "push" => new PushNotification(),
+                _ => throw new Exception("Wrong type"),
+            };
+        }
+    }
 }
