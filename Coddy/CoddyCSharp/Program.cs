@@ -1924,14 +1924,20 @@ class Program
     public static void Main(String[] args)
     {
         // Read input
-        string type = Console.ReadLine();
-        string message = Console.ReadLine();
+        string shippingType = Console.ReadLine();
+        double weight = Convert.ToDouble(Console.ReadLine());
 
-        // TODO: Create a NotificationFactory instance
-        var factory = new NotificationFactory();
-        // TODO: Use the factory to create the appropriate notification
-        var notification = factory.Create(type);
-        // TODO: Call the Send method and print the result
-        Console.WriteLine(notification.Send(message));    
+        // TODO: Create an OrderProcessor instance
+        var orders = new OrderProcessor();
+        // TODO: Based on shippingType ("standard", "express", or "overnight"),
+        // create the appropriate shipping strategy and set it on the processor
+        switch(shippingType){
+            case "standard": orders.SetShippingMethod(new StandardShipping()); break;
+            case "express" : orders.SetShippingMethod(new ExpressShipping()); break;
+            case "overnight": orders.SetShippingMethod(new OvernightShipping()); break;
+            default: throw new Exception("unknown type");
+        }
+        // TODO: Process the order and print the calculated cost
+        Console.WriteLine(orders.ProcessOrder(weight));
     }
 }

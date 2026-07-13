@@ -116,13 +116,60 @@ namespace patterns
         // - For any unrecognized type, return EmailNotification as default
         public INotification Create(string type)
         {
-            return type switch
+            switch (type)
             {
-                "email" => new EmailNotification(),
-                "sms" => new SmsNotification(),
-                "push" => new PushNotification(),
-                _ => throw new Exception("Wrong type"),
-            };
+                case "email": return new EmailNotification();
+                case "sms": return new SmsNotification();
+                case "push": return new PushNotification();
+                default:
+                    throw new Exception("Wrong type");
+            }
         }
+    }
+
+    // TODO: Define the IShippingStrategy interface with a CalculateCost method
+    public interface IShippingStrategy
+    {
+        // TODO: Declare the CalculateCost method that takes weight and returns double
+        double CalculateCost(double weight);
+    }
+
+    // TODO: Implement StandardShipping class
+    // Cost formula: weight * 1.5
+    public class StandardShipping : IShippingStrategy
+    {
+        // TODO: Implement CalculateCost method
+        public double CalculateCost(double weight) => weight * 1.5d;
+    }
+
+    // TODO: Implement ExpressShipping class
+    // Cost formula: weight * 3.0 + 5.0
+    public class ExpressShipping : IShippingStrategy
+    {
+        // TODO: Implement CalculateCost method
+        public double CalculateCost(double weight) => weight * 3.0d + 5.0d;
+    }
+
+    // TODO: Implement OvernightShipping class
+    // Cost formula: weight * 5.0 + 10.0
+    public class OvernightShipping : IShippingStrategy
+    {
+        // TODO: Implement CalculateCost method
+        public double CalculateCost(double weight) => weight * 5.0d + 10.0d;
+    }
+
+    public class OrderProcessor
+    {
+        // TODO: Add a private field to hold the current IShippingStrategy
+        private IShippingStrategy _IShippingStrategy;
+        // TODO: Implement SetShippingMethod to change the shipping strategy
+        public void SetShippingMethod(IShippingStrategy strategy)
+        {
+            // TODO: Set the strategy field
+            _IShippingStrategy = strategy;
+        }
+
+        // TODO: Implement ProcessOrder to calculate shipping cost using current strategy
+        public double ProcessOrder(double weight) => _IShippingStrategy.CalculateCost(weight);
     }
 }
