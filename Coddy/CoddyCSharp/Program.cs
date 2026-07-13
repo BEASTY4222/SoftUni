@@ -3,7 +3,9 @@ using Inheritance;
 using Encapsulation;
 using AdvancedFeatures;
 using System.Security.Cryptography.X509Certificates;
-using patterns;
+using patternsPartOne;
+using patternsPartTwo;
+using System.Runtime.InteropServices;
 
 class Program
 {
@@ -1921,23 +1923,51 @@ class Program
         public string Describe(double value) => $"Integer: {value}";
     }
 
+    // TODO: Create the Editor class (the invoker)
+    public class Editor
+    {
+        // TODO: Add a private field to store the current command
+        private ICommand _command;
+
+        // TODO: Implement SetCommand method
+        public void SetCommand(ICommand command)
+        {
+            // TODO: Store the command
+            _command = command;
+        }
+
+        // TODO: Implement ExecuteCommand method
+        public void ExecuteCommand()
+        {
+            // TODO: Execute the current command
+            _command.Execute();
+        }
+    }
+
     public static void Main(String[] args)
     {
-        // Read input
-        string shippingType = Console.ReadLine();
-        double weight = Convert.ToDouble(Console.ReadLine());
-
-        // TODO: Create an OrderProcessor instance
-        var orders = new OrderProcessor();
-        // TODO: Based on shippingType ("standard", "express", or "overnight"),
-        // create the appropriate shipping strategy and set it on the processor
-        switch(shippingType){
-            case "standard": orders.SetShippingMethod(new StandardShipping()); break;
-            case "express" : orders.SetShippingMethod(new ExpressShipping()); break;
-            case "overnight": orders.SetShippingMethod(new OvernightShipping()); break;
-            default: throw new Exception("unknown type");
-        }
-        // TODO: Process the order and print the calculated cost
-        Console.WriteLine(orders.ProcessOrder(weight));
+        // Read the comma-separated list of toppings
+        string input = Console.ReadLine();
+        string[] toppings = input.Split(',');
+        
+        // TODO: Start with a PlainPizza
+        IPizza plainPizza = new PlainPizza();
+        // TODO: Loop through each topping and wrap the pizza
+        // with the appropriate decorator based on the topping name:
+        // - "cheese" -> CheeseTopping
+        // - "pepperoni" -> PepperoniTopping
+        // - "mushrooms" -> MushroomTopping
+        foreach(string topping in toppings)
+            switch (topping)
+            {
+                case "cheese"   : plainPizza = new ChesseTopping(plainPizza); break;
+                case "pepperoni": plainPizza = new PepperoniTopping(plainPizza); break;
+                case "mushrooms" : plainPizza = new MushroomTopping(plainPizza); break; 
+                default:
+                    throw new Exception("Wrong topping");
+            }
+        // TODO: Print the final description and price
+        Console.WriteLine(plainPizza.GetDescription());
+        Console.WriteLine(plainPizza.GetPrice());
     }
 }

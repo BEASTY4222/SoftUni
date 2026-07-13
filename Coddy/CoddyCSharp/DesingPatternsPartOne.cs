@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace patterns
+namespace patternsPartOne
 {
     public class PatternCatalog
     {
