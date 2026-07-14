@@ -1,4 +1,6 @@
 using System;
+using System.Linq.Expressions;
+using Inheritance;
 
 namespace patternsPartTwo
 {
@@ -188,5 +190,230 @@ namespace patternsPartTwo
         public MushroomTopping(IPizza pizza) : base(pizza){}
         public override string GetDescription() => base.GetDescription() + ", Mushrooms";
         public override decimal GetPrice() => base.GetPrice() + 1.25m;
+    }
+
+
+    // TODO: Create an abstract ReportGenerator class
+    // 
+    // The class should have:
+    // - A public method Generate() that calls three steps in order:
+    //   1. GatherData()
+    //   2. FormatReport()
+    //   3. OutputReport()
+    // 
+    // - An abstract method GatherData()
+    // - An abstract method FormatReport()
+    // - A virtual method OutputReport() with default implementation
+    //   that prints "Sending to default printer" 
+
+    public abstract class ReportGenerator
+    {
+        public void Generate()
+        {
+            GatherData();
+            FormatReport();
+            OutputReport();
+        }
+
+        public abstract void GatherData();
+        public abstract void FormatReport();
+        public virtual void OutputReport() => Console.WriteLine("Sending default printer");
+    }
+
+    // TODO: Create a SalesReport class that inherits from ReportGenerator
+    // - GatherData() should print "Collecting sales data from database"
+    // - FormatReport() should print "Formatting as sales summary"
+    // - Uses the default OutputReport() from base class
+    public class SalesReport : ReportGenerator
+    {
+        public override void GatherData()
+        {
+            Console.WriteLine("Collecting sales data from database");
+        }
+
+        public override void FormatReport()
+        {
+            Console.WriteLine("Formatting as sales summary");
+        }
+
+        public override void OutputReport()
+        {
+            base.OutputReport();
+        }
+    }
+    
+    // TODO: Create an InventoryReport class that inherits from ReportGenerator
+    // - GatherData() should print "Scanning warehouse inventory"
+    // - FormatReport() should print "Formatting as inventory list"
+    // - Override OutputReport() to print "Sending to warehouse manager"
+
+    public class InventoryReport : ReportGenerator
+    {
+        public override void GatherData()
+        {
+            Console.WriteLine("Scanning warehouse inventory");
+        }
+
+        public override void FormatReport()
+        {
+            Console.WriteLine("Formatting as inventory list");
+        }
+
+        public override void OutputReport()
+        {
+            Console.WriteLine("Sending to warehouse manager");
+        }
+    }
+
+
+    // TODO: Define the ITrafficLightState interface with a Change method
+    public interface ITrafficLightState
+    {
+        // TODO: Add the Change method signature that takes a TrafficLight parameter
+        void Change(TrafficLight light);
+    }
+
+    // TODO: Implement RedState class
+    // - Should implement ITrafficLightState
+    // - Change method prints "Red - Stop! Changing to Green..." and transitions to GreenState
+    public class RedState : ITrafficLightState
+    {
+        public void Change(TrafficLight light)
+        {
+            // TODO: Print the message and transition to the next state
+            Console.WriteLine("Red - Stop! Changing to Green...");
+            light.SetState(new GreenState());
+        }
+    }
+
+    // TODO: Implement GreenState class
+    // - Should implement ITrafficLightState
+    // - Change method prints "Green - Go! Changing to Yellow..." and transitions to YellowState
+    public class GreenState : ITrafficLightState
+    {
+        public void Change(TrafficLight light)
+        {
+            // TODO: Print the message and transition to the next state
+            Console.WriteLine("Green - Go! Changing to Yellow...");
+            light.SetState(new YellowState());
+        }
+    }
+
+    // TODO: Implement YellowState class
+    // - Should implement ITrafficLightState
+    // - Change method prints "Yellow - Caution! Changing to Red..." and transitions to RedState
+    public class YellowState : ITrafficLightState
+    {
+        public void Change(TrafficLight light)
+        {
+            // TODO: Print the message and transition to the next state
+            Console.WriteLine("Yellow - Caution! Changing to Red...");
+            light.SetState(new RedState());
+        }
+    }
+
+    // TODO: Implement the TrafficLight context class
+    public class TrafficLight
+    {
+        // TODO: Add a private field to hold the current state
+        private ITrafficLightState _state;
+        // TODO: Constructor should initialize the light to RedState by default
+        public TrafficLight()
+        {
+            // TODO: Set initial state to RedState
+            _state = new RedState();
+        }
+
+        // TODO: Implement SetState method that state objects use to trigger transitions
+        public void SetState(ITrafficLightState state)
+        {
+            // TODO: Update the current state
+            _state = state;
+        }
+
+        // TODO: Implement Change method that delegates to the current state's Change method
+        public void Change()
+        {
+            // TODO: Call the current state's Change method
+            _state.Change(this);
+
+        }
+    }
+
+    // TODO: Define the IOrgComponent interface
+    // It should have:
+    // - A Name property (string)
+    // - A GetSalary() method that returns an integer
+    
+    public interface IOrgComponent
+    {
+        // TODO: Add the required members here
+        string Name{get; }
+        int GetSalary();
+    }
+
+    // TODO: Create the Employee class (leaf component)
+    // - Implement IOrgComponent
+    // - Constructor takes name (string) and salary (int)
+    // - GetSalary() returns the employee's own salary
+    
+    public class Employee : IOrgComponent
+    {
+        // TODO: Implement the Employee class
+        private int _salary;
+        
+        public string Name { get; }
+        
+        public Employee(string name, int salary)
+        {
+            // TODO: Initialize the employee
+            Name = name;
+            _salary = salary;
+        }
+        
+        public int GetSalary()
+        {
+            // TODO: Return the employee's salary
+            return _salary;
+        }
+    }
+    
+    // TODO: Create the Department class (composite component)
+    // - Implement IOrgComponent
+    // - Constructor takes name (string)
+    // - Maintains a list of IOrgComponent items
+    // - Add(IOrgComponent component) method to add members
+    // - GetSalary() returns the sum of all members' salaries
+    
+    public class Department : IOrgComponent
+    {
+        // TODO: Add a list to store child components
+        List<IOrgComponent> Deparment;
+        
+        public string Name { get; }
+        
+        public Department(string name)
+        {
+            // TODO: Initialize the department
+            Name = name;
+            Deparment = new List<IOrgComponent>();
+        }
+        
+        public void Add(IOrgComponent component)
+        {
+            // TODO: Add the component to the list
+            Deparment.Add(component);
+        }
+        
+        public int GetSalary()
+        {
+            // TODO: Calculate and return the total salary of all members
+            int sum = 0;
+            foreach(var child in Deparment)
+                sum += child.GetSalary();
+                
+            
+            return sum;
+        }
     }
 }

@@ -1946,28 +1946,56 @@ class Program
 
     public static void Main(String[] args)
     {
-        // Read the comma-separated list of toppings
-        string input = Console.ReadLine();
-        string[] toppings = input.Split(',');
+        int n = Convert.ToInt32(Console.ReadLine());
         
-        // TODO: Start with a PlainPizza
-        IPizza plainPizza = new PlainPizza();
-        // TODO: Loop through each topping and wrap the pizza
-        // with the appropriate decorator based on the topping name:
-        // - "cheese" -> CheeseTopping
-        // - "pepperoni" -> PepperoniTopping
-        // - "mushrooms" -> MushroomTopping
-        foreach(string topping in toppings)
-            switch (topping)
+        // TODO: Create a dictionary to store departments by name
+        // This will help you find parent departments when adding components
+        Dictionary<string, Department> departments = new Dictionary<string, Department>();
+        
+        // TODO: Keep track of the root department
+        Department root = null;
+        
+        for (int i = 0; i < n; i++)
+        {
+            string type = Console.ReadLine();
+            
+            if (type == "department")
             {
-                case "cheese"   : plainPizza = new ChesseTopping(plainPizza); break;
-                case "pepperoni": plainPizza = new PepperoniTopping(plainPizza); break;
-                case "mushrooms" : plainPizza = new MushroomTopping(plainPizza); break; 
-                default:
-                    throw new Exception("Wrong topping");
+                string name = Console.ReadLine();
+                string parent = Console.ReadLine();
+                
+                // TODO: Create the department
+                // TODO: Add it to the departments dictionary
+                // TODO: If parent is "root", this is the root department
+                // TODO: Otherwise, find the parent department and add this department to it
+                Department dep = new Department(name);
+                departments[name] = dep; // Add to dictionary first
+
+                if (parent == "root") 
+                {
+                    root = dep;
+                }
+                else if (departments.ContainsKey(parent))
+                {
+                    // Find the parent and add this new department to it
+                    departments[parent].Add(dep);
+                }
             }
-        // TODO: Print the final description and price
-        Console.WriteLine(plainPizza.GetDescription());
-        Console.WriteLine(plainPizza.GetPrice());
+            else if (type == "employee")
+            {
+                string name = Console.ReadLine();
+                int salary = Convert.ToInt32(Console.ReadLine());
+                string parent = Console.ReadLine();
+                
+                // TODO: Create the employee
+                // TODO: Find the parent department and add the employee to it
+                Employee em = new Employee(name, salary);
+                departments[parent].Add(em);
+            }
+        }
+        
+        // TODO: Print the total salary of the root department
+        // Format: "{root_name} Total Salary: {amount}"
+        Console.WriteLine($"{root.Name} Total Salary: {root.GetSalary()}");
     }
 }
