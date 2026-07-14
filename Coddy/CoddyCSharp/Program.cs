@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using patternsPartOne;
 using patternsPartTwo;
 using System.Runtime.InteropServices;
+using LibrarySystem;
 
 class Program
 {
@@ -1944,58 +1945,56 @@ class Program
         }
     }
 
-    public static void Main(String[] args)
+    public static void LibrarySystemMain()
     {
-        int n = Convert.ToInt32(Console.ReadLine());
-        
-        // TODO: Create a dictionary to store departments by name
-        // This will help you find parent departments when adding components
-        Dictionary<string, Department> departments = new Dictionary<string, Department>();
-        
-        // TODO: Keep track of the root department
-        Department root = null;
-        
-        for (int i = 0; i < n; i++)
-        {
-            string type = Console.ReadLine();
-            
-            if (type == "department")
-            {
-                string name = Console.ReadLine();
-                string parent = Console.ReadLine();
-                
-                // TODO: Create the department
-                // TODO: Add it to the departments dictionary
-                // TODO: If parent is "root", this is the root department
-                // TODO: Otherwise, find the parent department and add this department to it
-                Department dep = new Department(name);
-                departments[name] = dep; // Add to dictionary first
+        // Read inputs
+        string libraryName = Console.ReadLine();
+        Library library = new Library(libraryName);
 
-                if (parent == "root") 
-                {
-                    root = dep;
-                }
-                else if (departments.ContainsKey(parent))
-                {
-                    // Find the parent and add this new department to it
-                    departments[parent].Add(dep);
-                }
-            }
-            else if (type == "employee")
+        int numberOfBooks = int.Parse(Console.ReadLine());
+        for(int i = 0;i < numberOfBooks; ++i)
+        {
+            string bookInput = Console.ReadLine();
+            string[] bookParts = bookInput.Split('|');
+
+            library.AddBook(new Book(title: bookParts[1], author: bookParts[2] 
+            ,available: true, id: bookParts[0]));
+        }
+
+        int numberOfUsers = int.Parse(Console.ReadLine());
+        for(int i = 0;i < numberOfUsers; ++i)
+        {
+            string userInput = Console.ReadLine();
+            string[] userParts = userInput.Split('|');
+            library.RegisterUser(new LibrarySystem.User(name: userParts[0], memberId: int.Parse(userParts[1])));
+        }
+        
+        int numberOfActions = int.Parse(Console.ReadLine());
+        for(int i = 0;i < numberOfActions; ++i)
+        {
+            string actionInput = Console.ReadLine();
+            string[] actionParts = actionInput.Split('|');
+            if(actionParts[0] == "borrow")
             {
-                string name = Console.ReadLine();
-                int salary = Convert.ToInt32(Console.ReadLine());
-                string parent = Console.ReadLine();
-                
-                // TODO: Create the employee
-                // TODO: Find the parent department and add the employee to it
-                Employee em = new Employee(name, salary);
-                departments[parent].Add(em);
+                library.GetUserById(int.Parse(actionParts[2])).AddBorrowedBook(actionParts[2], available:library.GetBookById(actionParts[1]).IsAvailable);
+                library.GetBookById(actionParts[1]).Borrow();
+            }
+            else if(actionParts[0] == "return")
+            {
+                library.GetUserById(int.Parse(actionParts[2])).RemoveBorrowedBook(actionParts[2], available:library.GetBookById(actionParts[1]).IsAvailable);
+                library.GetBookById(actionParts[1]).Return();    
             }
         }
         
-        // TODO: Print the total salary of the root department
-        // Format: "{root_name} Total Salary: {amount}"
-        Console.WriteLine($"{root.Name} Total Salary: {root.GetSalary()}");
+        foreach(var user in library.Users)
+        {
+            Console.WriteLine($"{user.Name}: {user.borrowedBooksCount} book(s)");
+        }
+
+    }
+
+    public static void Main(String[] args)
+    {
+        LibrarySystemMain();
     }
 }

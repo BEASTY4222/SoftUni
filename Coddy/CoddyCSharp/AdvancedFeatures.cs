@@ -91,14 +91,14 @@ namespace AdvancedFeatures{
         }
     }
     
-    public class Book
+    public class BookA
     {
         // TODO: Define three read-only properties: Title, Author, and Year
         public readonly string Title;
         public readonly string Author;
         public readonly int Year;
         // TODO: Create a constructor that accepts title, author, and year
-        public Book(string title, string author, int year)
+        public BookA(string title, string author, int year)
         {
             Title = title;
             Author = author;
