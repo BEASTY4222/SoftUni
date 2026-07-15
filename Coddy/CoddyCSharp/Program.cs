@@ -1948,14 +1948,14 @@ class Program
     public static void LibrarySystemMain()
     {
         // Read inputs
-        string libraryName = Console.ReadLine();
+        string? libraryName = Console.ReadLine();
         Library library = new Library(libraryName);
 
         int numberOfBooks = int.Parse(Console.ReadLine());
         for(int i = 0;i < numberOfBooks; ++i)
         {
-            string bookInput = Console.ReadLine();
-            string[] bookParts = bookInput.Split('|');
+            string? bookInput = Console.ReadLine();
+            string[]? bookParts = bookInput?.Split('|');
 
             library.AddBook(new Book(title: bookParts[1], author: bookParts[2] 
             ,available: true, id: bookParts[0]));
@@ -1964,33 +1964,25 @@ class Program
         int numberOfUsers = int.Parse(Console.ReadLine());
         for(int i = 0;i < numberOfUsers; ++i)
         {
-            string userInput = Console.ReadLine();
-            string[] userParts = userInput.Split('|');
+            string? userInput = Console.ReadLine();
+            string[]? userParts = userInput?.Split('|');
             library.RegisterUser(new LibrarySystem.User(name: userParts[0], memberId: int.Parse(userParts[1])));
         }
         
         int numberOfActions = int.Parse(Console.ReadLine());
         for(int i = 0;i < numberOfActions; ++i)
         {
-            string actionInput = Console.ReadLine();
-            string[] actionParts = actionInput.Split('|');
-            if(actionParts[0] == "borrow")
+            string? actionInput = Console.ReadLine();
+            string[]? actionParts = actionInput?.Split('|');
+            if(actionParts?[0] == "borrow")
             {
-                library.GetUserById(int.Parse(actionParts[2])).AddBorrowedBook(actionParts[2], available:library.GetBookById(actionParts[1]).IsAvailable);
-                library.GetBookById(actionParts[1]).Borrow();
+                Console.WriteLine(library.BorrowBook(bookId: actionParts[1], memberId: int.Parse(actionParts[2])));
             }
-            else if(actionParts[0] == "return")
+            else if(actionParts?[0] == "return")
             {
-                library.GetUserById(int.Parse(actionParts[2])).RemoveBorrowedBook(actionParts[2], available:library.GetBookById(actionParts[1]).IsAvailable);
-                library.GetBookById(actionParts[1]).Return();    
+                Console.WriteLine(library.ReturnBook(bookId: actionParts[1], memberId: int.Parse(actionParts[2])));     
             }
         }
-        
-        foreach(var user in library.Users)
-        {
-            Console.WriteLine($"{user.Name}: {user.borrowedBooksCount} book(s)");
-        }
-
     }
 
     public static void Main(String[] args)

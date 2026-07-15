@@ -19,20 +19,15 @@ namespace LibrarySystem
 
         public void Borrow()
         {
-            if(IsAvailable){
-                IsAvailable = false;
-                Console.WriteLine($"{Title} has been borrowed");
-            }
-            else Console.WriteLine($"{Title} is not available");
+            
+            IsAvailable = false;
+               
         }
         public void Return()
         {
-            if(IsAvailable) Console.WriteLine($"{Title} was not borrowed");
-            else
-            {
-                IsAvailable = true;
-                Console.WriteLine($"{Title} has been returned");
-            }
+            
+            IsAvailable = true;
+            
         }
     }
 }

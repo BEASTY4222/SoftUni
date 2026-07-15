@@ -7,7 +7,8 @@ namespace LibrarySystem
         // TODO: Create auto-implemented property for MemberId (int)
         public int MemberId {get; private set;}
         private List<string> _borrowedBooks;
-        public int borrowedBooksCount {get => _borrowedBooks.Count;}
+        public int BorrowedBooksCount {get => _borrowedBooks.Count;}
+        public const int MAX_BORROWED_BOOKS = 3; 
         // TODO: Create a constructor that accepts name and memberId
         public User(string name, int memberId)
         {
@@ -27,5 +28,6 @@ namespace LibrarySystem
         }
 
         public bool HasBook(string bookId) => _borrowedBooks.Contains(bookId);
+        public bool CanBorrow() => BorrowedBooksCount < MAX_BORROWED_BOOKS;
     }
 }

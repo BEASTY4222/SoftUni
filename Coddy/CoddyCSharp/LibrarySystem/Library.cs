@@ -40,5 +40,43 @@ namespace LibrarySystem
             }
             return null;
         }
+    
+
+        public string BorrowBook(string bookId, int memberId)
+        {
+            Book curBook = GetBookById(bookId);
+            User curUser = GetUserById(memberId);
+
+            if(curBook == null)return "Book not found";
+            
+            if (curUser == null) return "User not found";
+            
+
+            if (!curBook.IsAvailable) return $"{curBook.Title} is not available";
+            
+
+            if (!curUser.CanBorrow()) return $"{curUser.Name} has reached the borrowing limit";
+            
+
+            curUser.AddBorrowedBook(curBook.Id,curBook.IsAvailable);
+            curBook.Borrow();
+            return $"{curUser.Name} borrowed {curBook.Title}";
+        }
+
+        public string ReturnBook(string bookId, int memberId)
+        {
+            Book curBook = GetBookById(bookId);
+            User curUser = GetUserById(memberId);
+
+            if(curBook == null)return "Book not found";
+            
+            if (curUser == null) return "User not found";
+            
+            if(!curUser.HasBook(bookId)) return $"{curUser.Name} did not borrow {curBook.Title}"; 
+
+            curUser.RemoveBorrowedBook(curBook.Id,curBook.IsAvailable);
+            curBook.Return();
+            return $"{curUser.Name} returned {curBook.Title}";
+        }
     }
 }
