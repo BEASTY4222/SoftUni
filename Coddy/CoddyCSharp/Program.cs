@@ -1996,8 +1996,13 @@ class Program
         }
     }
 
+    public static void ELearningPlatformMain()
+    {
+        
+    }
+
     public static void Main(String[] args)
     {
-        LibrarySystemMain();
+        ELearningPlatformMain();
     }
 }
