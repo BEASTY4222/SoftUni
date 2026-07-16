@@ -2063,6 +2063,39 @@ class Program
         }
     }
 
+    public static void GameCharacterComponent()
+    {
+        // Read character name
+        string characterName = Console.ReadLine();
+        
+        // Read initial max health
+        int maxHealth = Convert.ToInt32(Console.ReadLine());
+        
+        // Read number of commands
+        int numCommands = Convert.ToInt32(Console.ReadLine());
+        
+        // TODO: Create a Character with the given name
+        
+        // TODO: Create HealthComponent with maxHealth and InventoryComponent
+        
+        // TODO: Subscribe to HealthChanged event to print: Health changed: {newHealth}
+        
+        // TODO: Add both components to the character
+        
+        // TODO: Process each command
+        for (int i = 0; i < numCommands; i++)
+        {
+            string command = Console.ReadLine();
+            
+            // TODO: Handle each command type:
+            // - "damage": read amount, call TakeDamage on health component
+            // - "heal": read amount, call Heal on health component
+            // - "add_item": read item name, call AddItem on inventory component
+            // - "remove_item": read item name, call RemoveItem on inventory component
+            // - "update": call UpdateAll on character
+        }
+    }
+
     public static void Main(String[] args)
     {
         ELearningPlatformMain();
