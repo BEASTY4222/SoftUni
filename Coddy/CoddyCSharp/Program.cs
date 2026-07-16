@@ -7,6 +7,8 @@ using patternsPartOne;
 using patternsPartTwo;
 using System.Runtime.InteropServices;
 using LibrarySystem;
+using ELearning.Services;
+using ELearning.Models;
 
 class Program
 {
@@ -1998,7 +2000,67 @@ class Program
 
     public static void ELearningPlatformMain()
     {
+        // Read number of courses
+        int numCourses = Convert.ToInt32(Console.ReadLine());
         
+        // TODO: Create an EnrollmentService instance
+        EnrollmentService enrollmentService = new EnrollmentService();
+        // TODO: Read and create each course with its lessons
+        // For each course: read ID, title, instructor, number of lessons
+        // For each lesson: read title and duration
+        // Add lessons to course, then add course to service
+        for(int i = 0;i < numCourses; ++i)
+        {
+            Course curCourse = new Course(id: Console.ReadLine(),title: Console.ReadLine(),instructor: Console.ReadLine());
+        
+            int numOfLessons = int.Parse(Console.ReadLine());
+
+            for(int j = 0;j < numOfLessons; ++j)
+            {
+                curCourse.AddLesson(new Lesson(title: Console.ReadLine(),duration: int.Parse(Console.ReadLine())));
+            }
+
+            enrollmentService.AddCourse(curCourse);
+        }
+        
+        
+        // Read student information
+        int studentId = Convert.ToInt32(Console.ReadLine());
+        string studentName = Console.ReadLine();
+        
+        // TODO: Create a Student instance
+        Student student = new Student(studentId, studentName);
+        // Read number of operations
+        int numOperations = Convert.ToInt32(Console.ReadLine());
+        
+        // TODO: Process each operation
+        // For each operation: read action and courseId
+        // Handle: enroll, complete, progress, info
+        // Output the appropriate message based on the action
+        for(int i = 0;i < numOperations; ++i)
+        {
+            string op = Console.ReadLine();
+            string courseId = Console.ReadLine();
+            Course curCourse = enrollmentService.GetCourse(courseId);
+
+            switch (op)
+            {
+                case "enroll":
+                    if(curCourse != null && enrollmentService.Enroll(student, courseId: curCourse.Id)) Console.WriteLine($"Enrolled in: {curCourse.Title}");
+                    else Console.WriteLine($"Enrollment failed: {courseId}");
+                    break;
+                case "complete":
+                    Console.WriteLine($"Completed lesson in {curCourse.Title}");
+                    student.CompleteLesson(curCourse.Id);
+                    break;
+                case "progress":
+                    Console.WriteLine($"{curCourse.Title}: {student.GetProgress(curCourse.Id)}/{curCourse.lessons.Count} lessons");
+                    break;
+                case "info":
+                    Console.WriteLine($"{curCourse.Title} by {curCourse.Instructor} - {curCourse.TotalDuration} minutes");
+                    break;
+            }
+        }
     }
 
     public static void Main(String[] args)

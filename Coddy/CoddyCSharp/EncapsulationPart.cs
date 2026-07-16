@@ -171,7 +171,7 @@ namespace Encapsulation
         public string GetDisplay() => $"{Amount:F2} {Currency}";
     }
     
-    public class Student
+    public class StudentA
     {
         // TODO: Declare a public readonly field 'Name' (string)
         public readonly string Name;
@@ -180,7 +180,7 @@ namespace Encapsulation
         // TODO: Declare a private list to store grades (integers)
         private List<int> grades;
         // TODO: Create a constructor that accepts name and studentId
-        public Student(string name, string id)
+        public StudentA(string name, string id)
         {
             Name = name;
             ID = id;
