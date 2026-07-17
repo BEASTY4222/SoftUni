@@ -7,5 +7,6 @@ namespace Game.Components
     public interface IComponent
     {
         // TODO: Declare the Update method
+        void Update();
     }
 }

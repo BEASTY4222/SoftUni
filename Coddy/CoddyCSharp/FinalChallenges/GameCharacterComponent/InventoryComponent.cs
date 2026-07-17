@@ -7,12 +7,16 @@ namespace Game.Components
     public class InventoryComponent : IComponent
     {
         // TODO: Add a list to store item names
-        
+        private List<string> _inventory;
+        public InventoryComponent() => _inventory = new List<string>();
+
         // TODO: Implement AddItem(string item) method
         // Should print: Added: {itemName}
         public void AddItem(string item)
         {
             // TODO: Add item to list and print message
+            _inventory.Add(item);
+            Console.WriteLine($"Added: {item}");
         }
         
         // TODO: Implement RemoveItem(string item) method
@@ -21,6 +25,13 @@ namespace Game.Components
         public bool RemoveItem(string item)
         {
             // TODO: Remove item and print appropriate message
+            if(_inventory.Contains(item)){ 
+                _inventory.Remove(item);
+                Console.WriteLine($"Removed: {item}");
+                return true;
+            }
+
+            Console.WriteLine($"Item not found: {item}");
             return false;
         }
         
@@ -29,6 +40,8 @@ namespace Game.Components
         public void Update()
         {
             // TODO: Print inventory contents
+            if(_inventory.Count == 0) Console.WriteLine("Inventory: empty");
+            Console.WriteLine("Invetory: "+String.Join(", ",_inventory));
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using LibrarySystem;
 using ELearning.Services;
 using ELearning.Models;
+using Game;
+using Game.Components;
 
 class Program
 {
@@ -2075,24 +2077,49 @@ class Program
         int numCommands = Convert.ToInt32(Console.ReadLine());
         
         // TODO: Create a Character with the given name
+        Character mainC = new Character(name: characterName);
         
         // TODO: Create HealthComponent with maxHealth and InventoryComponent
-        
+        HealthComponent healthComponent = new HealthComponent(maxHealth);
+        InventoryComponent inventoryComponent = new InventoryComponent();
         // TODO: Subscribe to HealthChanged event to print: Health changed: {newHealth}
-        
+        healthComponent.HealthChanged += newHealth => Console.WriteLine($"Health changed: {newHealth}");
         // TODO: Add both components to the character
-        
+        mainC.AddComponent(healthComponent);
+        mainC.AddComponent(inventoryComponent);
         // TODO: Process each command
         for (int i = 0; i < numCommands; i++)
         {
             string command = Console.ReadLine();
-            
+
             // TODO: Handle each command type:
             // - "damage": read amount, call TakeDamage on health component
             // - "heal": read amount, call Heal on health component
             // - "add_item": read item name, call AddItem on inventory component
             // - "remove_item": read item name, call RemoveItem on inventory component
             // - "update": call UpdateAll on character
+            switch (command)
+            {
+                case "damage":
+                    int amount = int.Parse(Console.ReadLine());
+                    healthComponent.TakeDamage(amount);
+                    break;
+                case "heal":
+                    int healAmount = int.Parse(Console.ReadLine());
+                    healthComponent.Heal(healAmount);
+                    break;
+                case "add_item":
+                    string item = Console.ReadLine();
+                    inventoryComponent.AddItem(item);
+                    break;
+                case "remove_item":
+                    string remItem = Console.ReadLine();
+                    inventoryComponent.RemoveItem(remItem);
+                    break;
+                case "update":
+                    mainC.UpdateAll();
+                    break;
+            }
         }
     }
 
