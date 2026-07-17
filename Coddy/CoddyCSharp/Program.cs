@@ -11,6 +11,10 @@ using ELearning.Services;
 using ELearning.Models;
 using Game;
 using Game.Components;
+using Rental;
+using Rental.Models;
+using Rental.Pricing;
+using Rental.Services;
 
 class Program
 {
@@ -2121,6 +2125,49 @@ class Program
                     break;
             }
         }
+    }
+
+    public static void VehicleRentalServiceMain()
+    {
+        // Read pricing strategy type
+        string strategyType = Console.ReadLine();
+        
+        // TODO: Create the appropriate pricing strategy based on input
+        // "standard" -> StandardPricing
+        // "weekend" -> WeekendDiscountPricing
+        IPricingStrategy strategy = null; // TODO: Initialize based on strategyType
+        
+        // TODO: Create RentalService with the pricing strategy
+        
+        // Read number of vehicles
+        int vehicleCount = Convert.ToInt32(Console.ReadLine());
+        
+        // TODO: Read and add each vehicle to the service
+        // For each vehicle, read:
+        // - type (car, motorcycle, truck)
+        // - license plate
+        // - brand
+        // - daily rate
+        // - type-specific value (seats, engineCC, or cargo capacity)
+        
+        // Read number of operations
+        int operationCount = Convert.ToInt32(Console.ReadLine());
+        
+        // TODO: Process each operation
+        // Operations: rent, return, available
+        // 
+        // For "rent":
+        //   Read customerName, licensePlate, days
+        //   Output: "Rented: {Brand} ({LicensePlate}) to {CustomerName} for {Days} days - Total: {TotalPrice}"
+        //   Or: "Rental failed: {licensePlate}"
+        //
+        // For "return":
+        //   Read licensePlate
+        //   Output: "Returned: {licensePlate}" or "Return failed: {licensePlate}"
+        //
+        // For "available":
+        //   Output each available vehicle as:
+        //   "{Type}: {Brand} ({LicensePlate}) - {DailyRate}/day"
     }
 
     public static void Main(String[] args)

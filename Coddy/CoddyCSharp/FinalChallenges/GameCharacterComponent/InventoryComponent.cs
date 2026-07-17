@@ -41,7 +41,7 @@ namespace Game.Components
         {
             // TODO: Print inventory contents
             if(_inventory.Count == 0) Console.WriteLine("Inventory: empty");
-            Console.WriteLine("Invetory: "+String.Join(", ",_inventory));
+            else Console.WriteLine("Invetory: "+String.Join(", ",_inventory));
         }
     }
 }
