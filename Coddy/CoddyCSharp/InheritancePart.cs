@@ -265,32 +265,32 @@ namespace Inheritance
         }
     }
 
-    public class Vehicle
+    public class VehicleA
     {
         // TODO: Add LicensePlate property
         public string LicensePlate{get; set;}
         // TODO: Create constructor
-        public Vehicle(string licensePlate) => LicensePlate = licensePlate;
+        public VehicleA(string licensePlate) => LicensePlate = licensePlate;
         // TODO: Implement GetBasicInfo() method
         public string GetBasicInfo() => $"Vehicle: {LicensePlate}";
     }
 
-    public class Car : Vehicle
+    public class CarA : VehicleA
     {
         // TODO: Add NumberOfDoors property
         public int NumberOfDoors{get; set;}
         // TODO: Create constructor (remember to call base constructor)
-        public Car(string licensePlate, int numberOfDoors) : base(licensePlate) => NumberOfDoors = numberOfDoors;
+        public CarA(string licensePlate, int numberOfDoors) : base(licensePlate) => NumberOfDoors = numberOfDoors;
         // TODO: Implement Honk() method
         public string Honk() => $"{LicensePlate} honks: Beep beep!";
     }
 
-    public class Motorcycle : Vehicle
+    public class MotorcycleA : VehicleA
     {
         // TODO: Add HasSidecar property
         public bool HasSidecar{get; set;}   
         // TODO: Create constructor (remember to call base constructor)
-        public Motorcycle(string licensePlate, bool hasSidecar) : base(licensePlate) => HasSidecar = hasSidecar;
+        public MotorcycleA(string licensePlate, bool hasSidecar) : base(licensePlate) => HasSidecar = hasSidecar;
         // TODO: Implement Rev() method
         public string Rev() => $"{LicensePlate} revs: Vroom!";
     }

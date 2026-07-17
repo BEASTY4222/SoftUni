@@ -2135,10 +2135,10 @@ class Program
         // TODO: Create the appropriate pricing strategy based on input
         // "standard" -> StandardPricing
         // "weekend" -> WeekendDiscountPricing
-        IPricingStrategy strategy = null; // TODO: Initialize based on strategyType
+        IPricingStrategy strategy = strategyType == "standard" ? new StandardPricing() : new WeekendDiscountPricing(); // TODO: Initialize based on strategyType
         
         // TODO: Create RentalService with the pricing strategy
-        
+        RentalService rentalService = new RentalService(strategy);
         // Read number of vehicles
         int vehicleCount = Convert.ToInt32(Console.ReadLine());
         
@@ -2149,10 +2149,68 @@ class Program
         // - brand
         // - daily rate
         // - type-specific value (seats, engineCC, or cargo capacity)
+        for(int i = 0;i < vehicleCount; ++i)
+        {
+            string type = Console.ReadLine();
+            switch (type)
+            {
+                case "car"       :
+                rentalService.AddVehicle(
+                    new Car(licensePlate: Console.ReadLine(), 
+                            brand: Console.ReadLine(), 
+                            dailyRate: Convert.ToDecimal(Console.ReadLine()), 
+                            seats: Convert.ToInt16(Console.ReadLine())
+                            )
+                        );
+                    break;
+                case "motorcycle":
+                rentalService.AddVehicle(
+                    new Motorcycle(licensePlate: Console.ReadLine(), 
+                            brand: Console.ReadLine(), 
+                            dailyRate: Convert.ToDecimal(Console.ReadLine()), 
+                            engineCC: Convert.ToInt16(Console.ReadLine())
+                            )
+                        );
+                    break;
+                case "truck"     :
+                rentalService.AddVehicle(
+                    new Truck(licensePlate: Console.ReadLine(), 
+                            brand: Console.ReadLine(), 
+                            dailyRate: Convert.ToDecimal(Console.ReadLine()), 
+                            cargoCapacity: Convert.ToDecimal(Console.ReadLine())
+                            )
+                        );
+                    break;
+            }
+        }
         
         // Read number of operations
         int operationCount = Convert.ToInt32(Console.ReadLine());
-        
+        for(int i = 0;i < operationCount; ++i)
+        {
+            string op = Console.ReadLine();
+            switch (op)
+            {
+                case "rent":
+                    string customerName = Console.ReadLine();
+                    string licensePlate = Console.ReadLine();
+                    int days = Convert.ToInt16(Console.ReadLine());
+                    Rental.Models.Rental rental = rentalService.RentVehicle(customerName,licensePlate, days);
+                    if(rental != null) Console.WriteLine($"Rented: {rental.Vehicle.Brand} ({rental.Vehicle.LicensePlate}) to {rental.CustomerName} for {rental.Days} days - Total: {rental.TotalPrice:F1:#}");
+                    else Console.WriteLine($"Rental failed: {licensePlate}");
+                    break;
+                case "return":
+                    string licensePlateRet = Console.ReadLine();
+                    if(rentalService.ReturnVehicle(licensePlateRet)) Console.WriteLine($"Returned: {licensePlateRet}");
+                    else Console.WriteLine($"Return failed: {licensePlateRet}");
+                    break;
+                case "available":
+                    List<Vehicle> vehicles = rentalService.GetAvailableVehicles();
+                    foreach(Vehicle vehicle in vehicles)
+                        Console.WriteLine($"{vehicle.Type}: {vehicle.Brand} ({vehicle.LicensePlate}) - {vehicle.DailyRate}/day");
+                    break;
+            }
+        }
         // TODO: Process each operation
         // Operations: rent, return, available
         // 
@@ -2172,6 +2230,6 @@ class Program
 
     public static void Main(String[] args)
     {
-        ELearningPlatformMain();
+        VehicleRentalServiceMain();
     }
 }

@@ -8,5 +8,6 @@ namespace Rental.Pricing
     public interface IPricingStrategy
     {
         // TODO: Define the CalculatePrice method signature
+        decimal CalculatePrice(Vehicle vehicle, int days);
     }
 }

@@ -9,6 +9,7 @@ namespace Rental.Pricing
     public class StandardPricing : IPricingStrategy
     {
         // TODO: Implement CalculatePrice method
+        public decimal CalculatePrice(Vehicle vehicle, int days) => vehicle.DailyRate * days; 
     }
 
     // TODO: Implement WeekendDiscountPricing class
@@ -18,5 +19,10 @@ namespace Rental.Pricing
     public class WeekendDiscountPricing : IPricingStrategy
     {
         // TODO: Implement CalculatePrice method
+        public decimal CalculatePrice(Vehicle vehicle, int days)
+        {
+            if(days >= 2) return  (vehicle.DailyRate * days)* 0.90m;
+            else return vehicle.DailyRate * days;
+        }
     }
 }

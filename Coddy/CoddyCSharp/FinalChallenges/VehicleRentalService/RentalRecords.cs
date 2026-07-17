@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace Rental.Models
 {
@@ -8,7 +9,17 @@ namespace Rental.Models
     public class Rental
     {
         // TODO: Implement properties
-        
+        public readonly string CustomerName;
+        public readonly Vehicle Vehicle;
+        public readonly int Days;
+        public readonly decimal TotalPrice;
         // TODO: Implement constructor
+        public Rental(string name, Vehicle vehicle, int days, decimal totalPrice)
+        {
+            CustomerName = name;
+            Vehicle = vehicle;
+            Days = days;
+            TotalPrice = totalPrice;
+        }
     }
 }
