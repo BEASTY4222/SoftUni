@@ -1,0 +1,12 @@
+# Ignore Visual Studio private files
+.vs/
+
+# Ignore build outputs (these match ANY folder named 'obj' or 'bin' anywhere)
+obj/
+bin/
+
+# Ignore user-specific IDE files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
