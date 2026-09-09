@@ -6,6 +6,8 @@
 #include <map>
 #include <unordered_map>
 
+#include "classProperties/instanceStaticMembers.h"
+
 using namespace std;
 
 static bool isPalindrome(int num) {
@@ -70,7 +72,7 @@ bool isStringInOtherString(string str1, string str2) {
 	
     return false;
 }
-int binaryToDecimal(long long int n)//трябва да го разгледам по дълбоко
+int binaryToDecimal(long long int n)//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 {
     long long int num = n;
     int dec_value = 0;
@@ -661,7 +663,52 @@ int sumOfPrimesUpToN(int num) {
     return sum;
 }
 
+void INvsSTMembers(){
+    // Read input
+    string name1;
+    double price1;
+    string name2;
+    double price2;
+    
+    getline(cin, name1);
+    cin >> price1;
+    cin.ignore();
+    getline(cin, name2);
+    cin >> price2;
+    
+    // TODO: Print initial inventory stats using Product::getInventoryStats()
+    std::cout << Product::getInventoryStats() << std::endl;
+    // TODO: Create a scope block with curly braces
+    // Inside the block:
+    //   - Create a Product with name1 and price1
+    //   - Print its info using getInfo()
+    //   - Print current inventory stats
+    {
+        Product one(name1,price1);
+        std::cout << one.getInfo() << std::endl;;
+        std::cout << Product::getInventoryStats() << std::endl;
+    }
+    
+    // TODO: After the block ends, print "After first scope:"
+    // Then print the inventory stats
+    std::cout << "After first scope:" << std::endl;
+    std::cout << Product::getInventoryStats() << std::endl;
+
+    // TODO: Create another Product with name2 and price2
+    // Print its info and the inventory stats
+    Product two(name2,price2);
+    std::cout << two.getInfo() << std::endl;
+    std::cout << Product::getInventoryStats() << std::endl;
+    // TODO: Create a third Product with name "Bonus" and price 5.00
+    // Print the final inventory stats
+    Product three("Bonus", 5.00);
+
+    std::cout << Product::getInventoryStats() << std::endl;
+    
+    return;
+}
+
 int main()
 {
-    cout << sumOfPrimesUpToN(2) << endl;
+    INvsSTMembers();
 }
