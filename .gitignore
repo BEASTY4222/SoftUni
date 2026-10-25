@@ -10,3 +10,7 @@ bin/
 *.user
 *.userosscache
 *.sln.docstates
+
+#ignore .out / .exe files
+*.exe
+*.out
