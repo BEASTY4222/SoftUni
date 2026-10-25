@@ -16,6 +16,22 @@ namespace exercices{
                 return reversed;    
             }
         };
+
+        class CountingThings{
+            public:
+            static int countVowels(std::string s){
+                unsigned int count = 0;
+                std::string vowels = "aeiou";
+
+                for(int i = 0; i < s.length();i++)
+                    for(int j = 0; j < vowels.length();j++)
+                        if(std::tolower(s[i]) == vowels[j]) count++;
+                    
+                return count;
+            }
+        };
+
+        
         
     };
 }
