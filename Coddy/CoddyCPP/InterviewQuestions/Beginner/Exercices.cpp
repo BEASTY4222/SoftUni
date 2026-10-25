@@ -1,6 +1,7 @@
 #include <string>
 #include <stack>
 #include <cmath>
+#include <vector>
 
 namespace exercices{
     class BeginnerExercices{
@@ -26,6 +27,14 @@ namespace exercices{
                         if(std::tolower(s[i]) == vowels[j]) count++;
                     
                 return count;
+            }
+        
+            static int findMax(std::vector<int> nums) {
+                int max = nums[0];
+                for(int i = 0;i < nums.size();i++)
+                    if(nums[i] > max) max = nums[i];
+
+                return max;
             }
         };
 
