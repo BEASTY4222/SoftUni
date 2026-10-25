@@ -1,5 +1,6 @@
 #include <string>
 #include <stack>
+#include <cmath>
 
 namespace exercices{
     class BeginnerExercices{
@@ -31,7 +32,22 @@ namespace exercices{
             }
         };
 
-        
+        class Math{
+            public:
+            static bool isArmstrong(int n){
+                unsigned int sum = 0;
+                
+                std::string stringN = std::to_string(n);
+                unsigned int stringNLenght = stringN.length(); 
+                for(int i = 0;i < stringNLenght;i++){
+                    sum += std::pow(stringN[i] - '0', stringNLenght);
+                }
+
+                return n == sum;
+            }
+
+           
+        };
         
     };
 }
