@@ -65,6 +65,29 @@ namespace exercices{
 
                 return factorial;
             }
+
+            
+        };
+
+        class DynamicProgramming{
+            public:
+            static int fib(int n){
+                if (n < 2) return n;
+
+                unsigned int a = 0;
+                unsigned int b = 1;
+                unsigned int c = 0;
+
+                while(n > 1){
+                    
+                    c = a + b;
+                    a = b;
+                    b = c;
+                    n--;
+                }
+
+                return c;
+            }
         };
         
     };
