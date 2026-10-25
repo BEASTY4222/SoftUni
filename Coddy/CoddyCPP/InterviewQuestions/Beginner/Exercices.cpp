@@ -36,6 +36,13 @@ namespace exercices{
 
                 return max;
             }
+        
+            static int countEvens(std::vector<int> nums) {
+                unsigned int count = 0;
+                for(int num : nums)
+                    if(num % 2 == 0) count++;
+                return count;
+            }
         };
 
         class Math{
@@ -89,6 +96,19 @@ namespace exercices{
                         return false;
                     
                 return true;
+            }
+        
+            static bool isLeapYear(int year) {
+                if(year % 4 == 0){
+                    if(year % 100 == 0){
+                        if(year % 400 == 0)
+                            return true;
+                        return false;
+                    }
+                    return true;
+                }
+
+                return false;
             }
         };
 
