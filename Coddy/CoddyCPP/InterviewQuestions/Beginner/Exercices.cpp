@@ -46,7 +46,28 @@ namespace exercices{
                 return n == sum;
             }
 
-           
+            static int sumOfDigits(int n){
+                std::string stringN = std::to_string(n);
+                unsigned int sum = 0;
+
+                for(int i = 0;i < stringN.length();i++){
+                    sum += stringN[i] - '0';
+                }
+
+                return sum;
+            }
+
+            static int factorial(int n) {
+                if(n == 0) return 1;
+                unsigned int factorial = 1;
+
+                while(n > 0){
+                    factorial *= n;
+                    n--;
+                }
+
+                return factorial;
+            }
         };
         
     };
