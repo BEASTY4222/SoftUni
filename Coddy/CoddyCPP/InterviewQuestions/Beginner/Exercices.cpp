@@ -66,7 +66,21 @@ namespace exercices{
                 return factorial;
             }
 
-            
+            static bool isPrime(int n) {
+                if(n <= 1) return false;
+                if(n % 2 == 0) return true;
+                // terrible wrong works only on very small prime numbers numbers above 150-ish would fail
+                for(int i{3};i < 13;i++)
+                    if(n % i == 0 && i != n) return false;
+                
+                // correct way
+                // since d divides n, so does n / d both cannot be larger than √n
+                for (long long d = 3; d * d <= n; d += 2) 
+                    if (n % d == 0) 
+                        return false;
+                    
+                return true;
+            }
         };
 
         class DynamicProgramming{
