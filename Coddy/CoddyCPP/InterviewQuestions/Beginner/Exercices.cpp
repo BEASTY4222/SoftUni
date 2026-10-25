@@ -5,7 +5,7 @@
 namespace exercices{
     class BeginnerExercices{
         public:
-        class ReversingThings{
+        class ArraysAndStrings{
             public:
             static std::string reverseString(std::string s) {
                 std::string reversed = "";
@@ -16,10 +16,7 @@ namespace exercices{
 
                 return reversed;    
             }
-        };
 
-        class CountingThings{
-            public:
             static int countVowels(std::string s){
                 unsigned int count = 0;
                 std::string vowels = "aeiou";
