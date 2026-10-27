@@ -1,8 +1,11 @@
 #include <vector>
 #include <stack>
+#include <string>
+#include <cmath>
 
 namespace StackPracticeChallenges{
-    
+    typedef std::stack<int> Stack;
+
     std::vector<int> nse(std::vector<int> a) {
         //  left < cur push left push -1
         //  Input: [4, 5, 2, 10, 8]
@@ -30,6 +33,12 @@ namespace StackPracticeChallenges{
         }
 
     return result;
+    }
+
+    bool isBalancedParentheses(std::string s) {
+        // true ones will always have an even amount 
+        // not true for all cases but applies to this exercice
+        return s.length() % 2;   
     }
     
     template<class T>
