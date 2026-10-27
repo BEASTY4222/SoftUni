@@ -43,6 +43,35 @@ namespace exercices{
                     if(num % 2 == 0) count++;
                 return count;
             }
+        
+            static int findMaxConsecutiveOnes(std::vector<int> nums) {
+                bool inARun = false;
+                unsigned int counter = 0;
+                unsigned int max = 0;
+                
+                // If no ones, return zero
+                for(int num : nums)
+                    if(num == 1)
+                        inARun = true;
+                if(!inARun) return 0;
+
+                // Reset for a new loop
+                inARun = false;
+
+                for(int num : nums){
+                    if(num == 1)
+                        inARun = true;
+                    else
+                        inARun = false;
+                    
+                    if(inARun) counter++;
+                    else counter = 0;
+
+                    if(counter > max) max = counter;
+                }
+
+                return max;
+            }
         };
 
         class Math{
