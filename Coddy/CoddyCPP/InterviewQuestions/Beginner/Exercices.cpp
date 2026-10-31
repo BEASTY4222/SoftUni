@@ -22,8 +22,8 @@ namespace exercices{
                 unsigned int count = 0;
                 std::string vowels = "aeiou";
 
-                for(int i = 0; i < s.length();i++)
-                    for(int j = 0; j < vowels.length();j++)
+                for(unsigned int i = 0; i < s.length();i++)
+                    for(size_t j = 0; j < vowels.length();j++)
                         if(std::tolower(s[i]) == vowels[j]) count++;
                     
                 return count;
@@ -31,7 +31,7 @@ namespace exercices{
         
             static int findMax(std::vector<int> nums) {
                 int max = nums[0];
-                for(int i = 0;i < nums.size();i++)
+                for(size_t i = 0;i < nums.size();i++)
                     if(nums[i] > max) max = nums[i];
 
                 return max;
@@ -76,12 +76,12 @@ namespace exercices{
 
         class Math{
             public:
-            static bool isArmstrong(int n){
+            static bool isArmstrong(unsigned int n){
                 unsigned int sum = 0;
                 
                 std::string stringN = std::to_string(n);
                 unsigned int stringNLenght = stringN.length(); 
-                for(int i = 0;i < stringNLenght;i++){
+                for(unsigned int i = 0;i < stringNLenght;i++){
                     sum += std::pow(stringN[i] - '0', stringNLenght);
                 }
 
@@ -92,7 +92,7 @@ namespace exercices{
                 std::string stringN = std::to_string(n);
                 unsigned int sum = 0;
 
-                for(int i = 0;i < stringN.length();i++){
+                for(unsigned int i = 0;i < stringN.length();i++){
                     sum += stringN[i] - '0';
                 }
 
