@@ -139,6 +139,29 @@ namespace exercices{
 
                 return false;
             }
+        
+            static string toBinary(int n) {
+                // | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
+                std::string binary = "";
+                bool binPos[8] = {}; 
+                while(n > 0){
+                    if(n > 128){
+                        n -= 128;
+                        binary.push_back('1');
+                        binPos[7] = 1;
+                    }
+                    if(n > 64){
+                        n -= 64;
+                        binary.push_back('1');
+                        binPos[6] = 1;
+                    }
+                    
+                    if(n > 32){
+                        n -= 32;
+                        binary.push_back('1');
+                    }
+                }
+            }
         };
 
         class DynamicProgramming{

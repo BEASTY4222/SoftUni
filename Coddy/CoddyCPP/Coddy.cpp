@@ -21,7 +21,7 @@ int main()
     //int input;
     //std::cin >> input;
 
-    Utils::PrintArr(StackPracticeChallenges::nse({5, 2, 6, 1}));
+    std::cout << exercices::BeginnerExercices::Math::toBinary(13) << std::endl;
     
     return 0;
 }
