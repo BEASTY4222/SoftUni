@@ -22,6 +22,5 @@ int main()
     //std::cin >> input;
 
     std::cout << exercices::BeginnerExercices::Math::toBinary(13) << std::endl;
-    
     return 0;
 }
