@@ -1,3 +1,3 @@
 ﻿using FirstExercices; 
 
-FirstExercices.FirstExercices.Scramble("123");
+FirstExercices.FirstExercices.flightTimes();
