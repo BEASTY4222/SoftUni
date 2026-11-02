@@ -1,3 +1,3 @@
 ﻿using FirstExercices; 
 
-FirstExercices.FirstExercices.flightTimes();
+FirstExercices.FirstExercices.Exchanger();

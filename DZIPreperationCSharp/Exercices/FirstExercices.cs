@@ -1,3 +1,5 @@
+using System.Runtime.Intrinsics.Arm;
+
 namespace FirstExercices{
 	public static class FirstExercices {
 		static public void Scramble(string number){//123
@@ -35,6 +37,17 @@ namespace FirstExercices{
 		
 			Console.WriteLine($"{landingHoursString}:{landingminsString}");
 		} 
+
+		static public void Exchanger()
+		{
+
+			int BGN = Convert.ToInt32(Console.ReadLine());
+			double conversionRateToEuro = Convert.ToDouble(Console.ReadLine());
+
+			double euro = BGN * conversionRateToEuro;
+
+			Console.WriteLine($"{euro:f0} евро");
+		}
 	}
 	 
 
