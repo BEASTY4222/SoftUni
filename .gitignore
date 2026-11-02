@@ -15,7 +15,9 @@ bin/
 #ignore .out / .exe files
 *.exe
 *.out
+## too specific a.k.a I am dumb
 Coddy/CoddyCPP/main
+DZIPreperationCSharp/.vscode/settings.json
 
 # Prerequisites
 *.d
@@ -517,3 +519,4 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+
