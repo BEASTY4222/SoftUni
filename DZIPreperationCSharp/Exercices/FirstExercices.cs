@@ -44,9 +44,11 @@ namespace FirstExercices{
 			int BGN = Convert.ToInt32(Console.ReadLine());
 			double conversionRateToEuro = Convert.ToDouble(Console.ReadLine());
 
-			double euro = BGN * conversionRateToEuro;
+			double euro = BGN / conversionRateToEuro;
+			double cents = Math.Floor((euro - Math.Floor(euro)) * 100);
 
 			Console.WriteLine($"{euro:f0} евро");
+			Console.WriteLine($"{cents} цента");
 		}
 	}
 	 
