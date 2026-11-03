@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 
+#include "../../Utils.h"
+
 namespace exercices{
     class BeginnerExercices{
         public:
@@ -72,6 +74,18 @@ namespace exercices{
 
                 return max;
             }
+        
+            static void secondLargest(std::vector<int> nums) {
+                int max = nums[0], secondMax = nums[1];
+
+                for(size_t i = 0;i < nums.size()-1;i++){
+                    if(nums[i] < nums[i+1]){
+                        max = nums[i+1];
+                        secondMax = nums[i];
+                    }
+                }
+                std::cout << secondMax << std::endl;
+            }
         };
 
         class Math{
@@ -140,7 +154,7 @@ namespace exercices{
                 return false;
             }
         
-            static string toBinary(int n) {
+            static std::string toBinary(int n) {
                 // | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
                 std::string binary = "";
                 bool binPos[8] = {}; 
@@ -161,6 +175,8 @@ namespace exercices{
                         binary.push_back('1');
                     }
                 }
+
+                return "";
             }
         };
 

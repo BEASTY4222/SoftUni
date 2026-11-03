@@ -1,4 +1,7 @@
+#pragma once
+
 #include <vector>
+#include <iostream>
 
 namespace Utils{
     template<class T>

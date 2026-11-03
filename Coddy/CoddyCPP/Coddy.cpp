@@ -8,7 +8,7 @@
 
 #include "InterviewQuestions/Beginner/Exercices.cpp"
 #include "DSAALGO_Coddy/Stack/PracticeChallenges.cpp"
-#include "Utils.cpp"
+#include "Utils.h"
 
 using namespace std;
 
@@ -21,6 +21,6 @@ int main()
     //int input;
     //std::cin >> input;
 
-    std::cout << exercices::BeginnerExercices::Math::toBinary(13) << std::endl;
+    exercices::BeginnerExercices::ArraysAndStrings::secondLargest({4, 9, 2, 7, 9});
     return 0;
 }
